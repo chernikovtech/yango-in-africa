@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{--red:#FF1A1A;--black:#141414;--white:#FFF;--gray:#7A7A7A;--gray-bg:#F5F5F5;--dark:#1E1E1E;--radius:1rem;--max-w:1280px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--black);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(20,20,20,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--red)}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.7rem 2rem}
+.logo{font-weight:900;font-size:1.2rem;color:var(--white);letter-spacing:.12em;text-decoration:none}
+.logo span{color:var(--red)}
+.nav-back{color:#ccc;text-decoration:none;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.4rem}
+.nav-back:hover{color:var(--white)}
+section{padding:4rem 2rem}
+.inner{max-width:var(--max-w);margin:0 auto}
+.tag{color:var(--red);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
+.hero-sub{background:var(--black);min-height:55vh;display:flex;align-items:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-sub::before{content:'';position:absolute;top:-40%;right:-15%;width:70%;height:180%;background:radial-gradient(ellipse,rgba(255,26,26,.07)0%,transparent 70%);pointer-events:none}
+.hero-sub .inner{position:relative;z-index:1;width:100%}
+.hero-sub h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:var(--white);line-height:1.05;max-width:850px;margin-bottom:1rem}
+.hero-sub .subtitle{color:var(--gray);font-size:1.1rem;max-width:700px;margin-bottom:2rem}
+.stats-row{display:flex;gap:2.5rem;flex-wrap:wrap}
+.stat .n{font-size:2rem;font-weight:900;color:var(--red);line-height:1}
+.stat .l{color:var(--gray);font-size:.82rem;margin-top:.2rem}
+h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;line-height:1.1;margin-bottom:.8rem}
+h3{font-size:1.15rem;font-weight:800;margin-bottom:.5rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.card{background:var(--gray-bg);border-radius:var(--radius);padding:2rem;border-top:3px solid var(--red);transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.card h4{font-weight:800;margin-bottom:.4rem}
+.card p{color:var(--gray);font-size:.88rem}
+.dark-card{background:var(--dark);border-radius:var(--radius);padding:2rem;color:var(--white)}
+.dark-card h3{color:var(--red)}
+.dark-card p{color:#aaa;font-size:.9rem}
+.metric-row{display:flex;gap:.5rem;align-items:baseline;padding:1rem 0;border-bottom:1px solid #333}
+.metric-row:last-child{border:none}
+.metric-row .n{font-size:1.6rem;font-weight:900;color:var(--red);min-width:90px}
+.metric-row .d{color:#aaa;font-size:.88rem}
+.feat{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem}
+.feat-icon{width:44px;height:44px;min-width:44px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem}
+.feat h4{font-size:.95rem;font-weight:700;margin-bottom:.2rem}
+.feat p{color:var(--gray);font-size:.85rem}
+.cta-bar{background:var(--red);color:white;text-align:center;padding:3.5rem 2rem;margin-top:3rem}
+.cta-bar h2{color:white;margin-bottom:.8rem}
+.cta-bar p{max-width:550px;margin:0 auto 1.5rem;opacity:.9;font-size:1rem}
+.cta-btn{display:inline-block;background:var(--black);color:var(--white);padding:.9rem 2.2rem;border-radius:var(--radius);text-decoration:none;font-weight:700;transition:transform .2s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:center;font-size:.82rem}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.dash-card{background:var(--dark);border-radius:.8rem;padding:1.5rem;color:white}
+.dash-card .change{font-size:.75rem;padding:.15rem .5rem;border-radius:4px;display:inline-block;margin-bottom:.5rem}
+.dash-card .change.up{background:rgba(34,197,94,.15);color:#22c55e}
+.dash-card .change.down{background:rgba(239,68,68,.15);color:#ef4444}
+.dash-card .val{font-size:1.8rem;font-weight:900;margin-bottom:.2rem}
+.dash-card .lbl{color:#888;font-size:.8rem}
+.arch-layer{padding:1.2rem 1.8rem;font-weight:600;color:white;font-size:.95rem;display:flex;justify-content:space-between;align-items:center}
+.arch-layer:first-child{border-radius:var(--radius) var(--radius) 0 0}
+.arch-layer:last-child{border-radius:0 0 var(--radius) var(--radius)}
+.arch-layer .detail{font-size:.75rem;font-weight:400;opacity:.7}
+.compare-table{width:100%;border-collapse:collapse;margin-top:1.5rem}
+.compare-table th,.compare-table td{padding:.8rem 1rem;text-align:left;font-size:.88rem}
+.compare-table th{color:var(--gray);font-weight:600;border-bottom:2px solid var(--red);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em}
+.compare-table td{border-bottom:1px solid #eee;color:var(--black)}
+.compare-table tr:last-child td{border:none}
+.compare-table .highlight{background:rgba(255,26,26,.05)}
+.compare-table .yango{font-weight:800;color:var(--red)}
+.partner-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+.partner-card{background:var(--dark);border-radius:var(--radius);padding:2rem;border-left:3px solid var(--red)}
+.partner-card h4{color:var(--red);font-size:1rem;margin-bottom:.5rem}
+.partner-card p{color:#aaa;font-size:.85rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-top:1.5rem}
+.service-chip{background:var(--gray-bg);border-radius:.6rem;padding:1rem;text-align:center}
+.service-chip .icon{font-size:1.5rem;margin-bottom:.3rem}
+.service-chip h5{font-size:.82rem;font-weight:700}
+.service-chip p{font-size:.72rem;color:var(--gray)}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}.stats-row{gap:1.5rem}.compare-table{font-size:.8rem}.compare-table th,.compare-table td{padding:.5rem}}
+@media(max-width:600px){.dash-grid{grid-template-columns:1fr}.services-grid{grid-template-columns:1fr 1fr}}
+</style>
+<title>Sovereign AI & Cloud Infrastructure — Yango Tech</title>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">YANGO <span>TECH</span></a>
+    <a href="index.html" class="nav-back">← Back to Overview</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-sub">
+  <div class="inner">
+    <div class="tag">Sovereign Cloud & AI Infrastructure</div>
+    <h1>Your Nation's Data. Your Nation's Cloud. No Dependencies.</h1>
+    <p class="subtitle">Self-developed, full-stack hyperscale cloud platform — designed for data sovereignty, regulatory compliance, and AI-native workloads. No third-party vendor dependency. ~30% TCO savings vs global hyperscalers.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="n">~30%</div><div class="l">TCO savings vs AWS/GCP/Azure</div></div>
+      <div class="stat"><div class="n">100%</div><div class="l">Self-developed — no vendor lock-in</div></div>
+      <div class="stat"><div class="n">3+</div><div class="l">Geo-distributed data centers</div></div>
+      <div class="stat"><div class="n">AI-Native</div><div class="l">ML/LLM tools built into platform</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SOVEREIGN -->
+<section style="background:var(--gray-bg)">
+  <div class="inner">
+    <div class="tag">The Imperative</div>
+    <h2>Why Africa Needs Sovereign Cloud</h2>
+    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">African nations are generating massive amounts of data — healthcare records, financial transactions, citizen identity, energy grids. Where that data lives and who controls it is a matter of national security.</p>
+    <div class="grid3">
+      <div class="card">
+        <h4>🏛️ Data Sovereignty</h4>
+        <p>Governments mandate that citizen data stays within national borders. Global hyperscalers store data in foreign jurisdictions — creating regulatory, legal, and security risks.</p>
+      </div>
+      <div class="card">
+        <h4>🔒 Strategic Independence</h4>
+        <p>Relying on foreign cloud providers means foreign entities can restrict, audit, or shut down access to your own national infrastructure during geopolitical tensions.</p>
+      </div>
+      <div class="card">
+        <h4>💰 Economic Leakage</h4>
+        <p>Every dollar spent on AWS, GCP, or Azure leaves the African economy. Sovereign cloud keeps investment local — building skills, jobs, and technological capability.</p>
+      </div>
+      <div class="card">
+        <h4>⚡ Latency & Performance</h4>
+        <p>Data traveling to European or US cloud regions adds 100-200ms latency. In-country infrastructure delivers sub-10ms response times for real-time AI applications.</p>
+      </div>
+      <div class="card">
+        <h4>📜 Regulatory Compliance</h4>
+        <p>Africa's data protection laws (AU Convention on Cybersecurity, national DPA acts) increasingly require local data residency. Sovereign cloud is compliance by default.</p>
+      </div>
+      <div class="card">
+        <h4>🧠 AI Readiness</h4>
+        <p>National AI strategies require GPU compute capacity for training and inference. Without sovereign infrastructure, AI development depends on foreign compute allocation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM ARCHITECTURE -->
+<section>
+  <div class="inner">
+    <div class="tag">Platform Architecture</div>
+    <h2>Self-Developed Full-Stack Cloud</h2>
+    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Every layer built in-house — from hardware design to SaaS applications. No dependency on third-party software vendors at any level.</p>
+
+    <div class="grid2">
+      <div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div class="arch-layer" style="background:var(--red)">
+            <span>Applications (SaaS)</span>
+            <span class="detail">Business tools · Third-party marketplace</span>
+          </div>
+          <div class="arch-layer" style="background:#222">
+            <span>Platform Services (PaaS)</span>
+            <span class="detail">Containers · ML · Data platform</span>
+          </div>
+          <div class="arch-layer" style="background:#444">
+            <span>Infrastructure (IaaS)</span>
+            <span class="detail">Compute · Storage · Network</span>
+          </div>
+          <div class="arch-layer" style="background:#666">
+            <span>Security Services</span>
+            <span class="detail">Encryption · IAM · Compliance</span>
+          </div>
+          <div class="arch-layer" style="background:#888">
+            <span>Data Centers</span>
+            <span class="detail">In-house designed server racks</span>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem">
+          <h3>Console & Management</h3>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem">
+            <div style="background:var(--gray-bg);padding:.8rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600">Single User Experience</div>
+            <div style="background:var(--gray-bg);padding:.8rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600">Console & Dashboard</div>
+            <div style="background:var(--gray-bg);padding:.8rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600">Billing & Metering</div>
+            <div style="background:var(--gray-bg);padding:.8rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600">24/7 Technical Support</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3>Platform Services — Deep Dive</h3>
+        <div class="services-grid">
+          <div class="service-chip"><div class="icon">📦</div><h5>Containers</h5><p>Kubernetes-native orchestration</p></div>
+          <div class="service-chip"><div class="icon">🧠</div><h5>Machine Learning</h5><p>Training, inference, model registry</p></div>
+          <div class="service-chip"><div class="icon">📊</div><h5>Data Platform</h5><p>ETL, streaming, data lakes</p></div>
+          <div class="service-chip"><div class="icon">🛡️</div><h5>Security</h5><p>Encryption, IAM, DDoS protection</p></div>
+          <div class="service-chip"><div class="icon">💾</div><h5>Storage</h5><p>Object, block, file — S3-compatible</p></div>
+          <div class="service-chip"><div class="icon">⚡</div><h5>Serverless</h5><p>Event-driven compute</p></div>
+          <div class="service-chip"><div class="icon">🌐</div><h5>Networking</h5><p>VPC, load balancers, CDN</p></div>
+          <div class="service-chip"><div class="icon">🔧</div><h5>DevOps</h5><p>CI/CD, monitoring, logging</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ON-PREMISE PRODUCTS -->
+<section style="background:var(--black);color:white">
+  <div class="inner">
+    <div class="tag">On-Premise Products</div>
+    <h2 style="color:white">Enterprise-Grade Tools for National Deployment</h2>
+    <p style="color:#888;margin-bottom:2rem">A suite of technologies for complex data processing, visualization, and AI development — deployable fully on-premise within your national data center.</p>
+
+    <div class="grid2" style="gap:2rem">
+      <div class="dark-card" style="background:#252525">
+        <h3>YDB — Distributed Database</h3>
+        <p style="margin-top:.5rem">Horizontally scalable distributed SQL database designed for mission-critical workloads. ACID transactions at scale, automatic failover, multi-region replication.</p>
+        <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">SQL + NoSQL</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">ACID</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Multi-region</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Auto-failover</div>
+        </div>
+      </div>
+      <div class="dark-card" style="background:#252525">
+        <h3>DataLens — BI & Visualization</h3>
+        <p style="margin-top:.5rem">Data visualization, analysis, and interactive reporting platform. Connect to any data source, build dashboards without code, share across organizations.</p>
+        <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">90+ dashboards</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">No-code</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Real-time</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Multi-source</div>
+        </div>
+      </div>
+      <div class="dark-card" style="background:#252525">
+        <h3>YTsaurus — Big Data Platform</h3>
+        <p style="margin-top:.5rem">MapReduce, dynamic tables, batch and stream processing at petabyte scale. SDK, UI, and CLI interfaces for data engineering teams.</p>
+        <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">MapReduce</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Dynamic Tables</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">SPYT (Spark)</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Petabyte-scale</div>
+        </div>
+      </div>
+      <div class="dark-card" style="background:#252525">
+        <h3>AI Studio — ML Development</h3>
+        <p style="margin-top:.5rem">Complete ML lifecycle management — experiment tracking, model training on GPU clusters, deployment, monitoring. Includes LLM APIs and cognitive services.</p>
+        <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">GPU training</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">LLM APIs</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Cognitive services</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Model registry</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI CAPABILITIES -->
+<section>
+  <div class="inner">
+    <div class="tag">AI & ML Layer</div>
+    <h2>AI-Native Cloud — Not an Afterthought</h2>
+    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Unlike hyperscalers where AI is an add-on, our platform was built with ML/AI at its core — from GPU orchestration to production model serving.</p>
+
+    <div class="grid2">
+      <div>
+        <div class="feat"><div class="feat-icon">🧠</div><div><h4>LLM APIs & Playground</h4><p>Integrated large language model APIs — including Arabic-aware Yasmina. Playground for prototyping, fine-tuning, and prompt engineering. Deploy custom models alongside foundation models.</p></div></div>
+        <div class="feat"><div class="feat-icon">📊</div><div><h4>ML Data Scientist Tools</h4><p>Jupyter-compatible notebooks, distributed training, hyperparameter optimization, experiment tracking. GPU cluster management with automatic scheduling.</p></div></div>
+        <div class="feat"><div class="feat-icon">🔮</div><div><h4>Cognitive Services</h4><p>Pre-built AI services: speech-to-text (SpeechKit), text-to-speech, vision, translation, document understanding. Deploy in minutes, not months.</p></div></div>
+        <div class="feat"><div class="feat-icon">🔄</div><div><h4>GPU/CPU Orchestration</h4><p>Multi-model deployment on shared GPU clusters. Dynamic allocation based on demand. Inference optimization for real-time and batch workloads.</p></div></div>
+        <div class="feat"><div class="feat-icon">🌍</div><div><h4>African Language Support</h4><p>Speech and NLP models trained on African languages — Swahili, Bemba, Nyanja, Hausa, Yoruba, Amharic, and more. Continuously expanding coverage.</p></div></div>
+      </div>
+      <div>
+        <div class="dark-card">
+          <h3>AI Infrastructure Dashboard</h3>
+          <div class="dash-grid" style="grid-template-columns:1fr 1fr;margin-top:1.5rem">
+            <div class="dash-card"><div class="change up">▲ Active</div><div class="val">12+</div><div class="lbl">AI models deployed</div></div>
+            <div class="dash-card"><div class="change up">▲ Scaling</div><div class="val">2.4 TB</div><div class="lbl">Daily data processed</div></div>
+            <div class="dash-card"><div class="change up">▲ Global</div><div class="val">26M+</div><div class="lbl">Daily AI interactions</div></div>
+            <div class="dash-card"><div class="change up">▲ Local</div><div class="val">100%</div><div class="lbl">On-premise — data stays in-country</div></div>
+          </div>
+          <div style="margin-top:1.5rem;padding:1.2rem;background:#252525;border-radius:.5rem">
+            <p style="color:var(--red);font-weight:700;font-size:.85rem">AI MODEL REGISTRY</p>
+            <div style="margin-top:.8rem">
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid #333;font-size:.82rem"><span style="color:white">Grid Load Forecasting</span><span style="color:#22c55e">● Active</span></div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid #333;font-size:.82rem"><span style="color:white">Medical Image Classification</span><span style="color:#22c55e">● Active</span></div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid #333;font-size:.82rem"><span style="color:white">Credit Scoring (Alternative Data)</span><span style="color:#22c55e">● Active</span></div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid #333;font-size:.82rem"><span style="color:white">Multilingual NLP Agent</span><span style="color:#22c55e">● Active</span></div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid #333;font-size:.82rem"><span style="color:white">Document OCR & Extraction</span><span style="color:#22c55e">● Active</span></div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;font-size:.82rem"><span style="color:white">Anomaly Detection (Energy/Finance)</span><span style="color:#f59e0b">● Training</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TCO COMPARISON -->
+<section style="background:var(--gray-bg)">
+  <div class="inner">
+    <div class="tag">Cost Advantage</div>
+    <h2>~30% TCO Savings vs Global Hyperscalers</h2>
+    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Competitive pricing with no licensing markups, no egress fees surprise, and partnership-oriented commercial models.</p>
+
+    <div style="background:white;border-radius:var(--radius);padding:2rem;overflow-x:auto">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th class="yango">Yango Cloud</th>
+            <th>AWS / GCP / Azure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight"><td><strong>Data Sovereignty</strong></td><td class="yango">✅ Full in-country residency</td><td>⚠️ Nearest region may be 1000s of km away</td></tr>
+          <tr><td><strong>Vendor Lock-in</strong></td><td class="yango">✅ No proprietary APIs — open standards</td><td>❌ Deep lock-in to proprietary services</td></tr>
+          <tr class="highlight"><td><strong>Average TCO</strong></td><td class="yango">✅ ~30% lower</td><td>Higher — egress fees, support tiers, markups</td></tr>
+          <tr><td><strong>AI/ML Native</strong></td><td class="yango">✅ Built-in from day one</td><td>⚠️ Add-on services with separate billing</td></tr>
+          <tr class="highlight"><td><strong>African Language NLP</strong></td><td class="yango">✅ Swahili, Bemba, Hausa, Amharic+</td><td>❌ Limited or no support</td></tr>
+          <tr><td><strong>Hardware</strong></td><td class="yango">✅ In-house designed server racks</td><td>Third-party (unknown origin)</td></tr>
+          <tr class="highlight"><td><strong>Partnership Model</strong></td><td class="yango">✅ JV, reseller, strategic options</td><td>❌ Customer-vendor relationship only</td></tr>
+          <tr><td><strong>Government Certification</strong></td><td class="yango">✅ UAE DCAI Tier S · Sovereign-ready</td><td>Varies by region</td></tr>
+          <tr class="highlight"><td><strong>Latency (in-country)</strong></td><td class="yango">✅ Sub-10ms</td><td>⚠️ 100-200ms to nearest region</td></tr>
+          <tr><td><strong>Knowledge Transfer</strong></td><td class="yango">✅ Included — build local capability</td><td>❌ Self-service documentation only</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOYMENT MODEL -->
+<section>
+  <div class="inner">
+    <div class="tag">Deployment</div>
+    <h2>How We Deploy National Cloud Infrastructure</h2>
+    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Three independent, geographically distributed data centers with our own server racks — designed, shipped, and commissioned by our hardware team.</p>
+
+    <div class="grid2">
+      <div>
+        <div class="feat"><div class="feat-icon">📐</div><div><h4>Data Center Design & Advisory</h4><p>Site assessment, power and cooling requirements, network architecture, security design. Compliant with Tier III+ standards.</p></div></div>
+        <div class="feat"><div class="feat-icon">🔧</div><div><h4>Hardware Commissioning</h4><p>In-house designed server racks shipped and installed. Full R&D and supply chain management — no third-party hardware dependency.</p></div></div>
+        <div class="feat"><div class="feat-icon">☁️</div><div><h4>Cloud Platform Deployment</h4><p>Full stack installed: IaaS, PaaS, SaaS layers. Console, billing, monitoring, and support systems configured and tested.</p></div></div>
+        <div class="feat"><div class="feat-icon">🧠</div><div><h4>AI Infrastructure</h4><p>GPU clusters commissioned, ML platform deployed, models trained on local data. LLM APIs and cognitive services activated.</p></div></div>
+        <div class="feat"><div class="feat-icon">👥</div><div><h4>Knowledge Transfer</h4><p>12-24 month program training local engineers to operate and develop on the platform. Builds sovereign technical capability.</p></div></div>
+      </div>
+      <div class="dark-card">
+        <h3>Deployment Roadmap</h3>
+        <div style="margin-top:1.5rem">
+          <div class="metric-row"><div class="n" style="font-size:1.2rem;min-width:110px">Month 1-2</div><div class="d"><strong>Assessment & Design</strong> — Site survey, architecture design, hardware specification, regulatory mapping</div></div>
+          <div class="metric-row"><div class="n" style="font-size:1.2rem;min-width:110px">Month 3-4</div><div class="d"><strong>Hardware & Setup</strong> — Server racks manufactured, shipped, installed. Network and power commissioned</div></div>
+          <div class="metric-row"><div class="n" style="font-size:1.2rem;min-width:110px">Month 5-6</div><div class="d"><strong>Platform Deploy</strong> — Cloud stack installed, security configured, first workloads migrated</div></div>
+          <div class="metric-row"><div class="n" style="font-size:1.2rem;min-width:110px">Month 7-9</div><div class="d"><strong>AI Activation</strong> — GPU clusters live, ML platform deployed, AI models trained on national data</div></div>
+          <div class="metric-row"><div class="n" style="font-size:1.2rem;min-width:110px">Month 10-24</div><div class="d"><strong>Scale & Transfer</strong> — Production workloads at scale, local team training, operational handover</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERSHIP MODELS -->
+<section style="background:var(--black);color:white">
+  <div class="inner">
+    <div class="tag">Commercial Model</div>
+    <h2 style="color:white">Partnership-Oriented — Not Vendor-Customer</h2>
+    <p style="color:#888;margin-bottom:2rem">We're open to multiple partnership structures — designed to build sovereign capability, not dependency.</p>
+
+    <div class="partner-grid">
+      <div class="partner-card">
+        <h4>Strategic Partnership</h4>
+        <p>Joint investment in national cloud infrastructure. Shared ownership, shared revenue. Government retains sovereignty and control. Yango provides technology and operations.</p>
+      </div>
+      <div class="partner-card">
+        <h4>Solution Partnership</h4>
+        <p>Deploy specific solutions (MedTech, FinTech, e-Gov) on Yango Cloud. Pay-as-you-grow OPEX model. Platform managed by Yango with progressive knowledge transfer.</p>
+      </div>
+      <div class="partner-card">
+        <h4>Reseller Partnership</h4>
+        <p>Local telecom or systems integrator resells Yango Cloud services under their own brand. White-label option with full technical support from Yango.</p>
+      </div>
+      <div class="partner-card">
+        <h4>Managed Services</h4>
+        <p>Full SLA-based operation of national cloud infrastructure. Yango operates, government owns. Fixed-cost or consumption-based commercial models available.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem;background:#252525;border-radius:var(--radius);padding:2rem;text-align:center">
+      <h3 style="color:var(--red);margin-bottom:.5rem">UAE Government Credential</h3>
+      <p style="color:#aaa;font-size:1rem">DCAI AI Seal — <strong style="color:white">Tier S</strong> (Highest Level)</p>
+      <p style="color:#888;font-size:.85rem;margin-top:.5rem">Government-issued recognition for advanced, reliable AI solutions. Combined with SAAL — 100% UAE-owned strategic partnership enabling UAE-origin eligibility.</p>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section style="background:var(--gray-bg)">
+  <div class="inner">
+    <div class="tag">Use Cases</div>
+    <h2>What National Cloud Enables</h2>
+    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Sovereign cloud isn't just infrastructure — it's the foundation for every digital national priority.</p>
+    <div class="grid3">
+      <div class="card"><h4>🏥 National Health Platform</h4><p>Medical ID, EMR, epidemiology monitoring, telemedicine — all running on sovereign infrastructure with full data residency compliance.</p></div>
+      <div class="card"><h4>🪪 Digital Identity</h4><p>Biometric citizen database, cross-agency verification, e-KYC — sensitive identity data never leaves national borders.</p></div>
+      <div class="card"><h4>💰 Financial Infrastructure</h4><p>Core banking, payment switching, credit bureaus, mobile money platforms — running locally with sub-10ms latency.</p></div>
+      <div class="card"><h4>🏛️ e-Government</h4><p>Citizen services portal, tax systems, customs, procurement — all government digital services on a single sovereign platform.</p></div>
+      <div class="card"><h4>⚡ Energy & Utilities</h4><p>Smart grid, SCADA data processing, billing systems, customer AI — real-time utility management on local infrastructure.</p></div>
+      <div class="card"><h4>🎓 Education & Research</h4><p>University research computing, national exam systems, digital learning platforms — with sovereign data governance.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-bar">
+  <h2>Ready to explore sovereign cloud for your nation?</h2>
+  <p>We begin with a data center advisory assessment — evaluating your current infrastructure, regulatory requirements, and AI readiness.</p>
+  <a class="cta-btn" href="mailto:eechernikov@yango-team.com">Schedule a Discussion →</a>
+</div>
+
+<footer>
+  <div style="font-weight:900;font-size:1.1rem;color:white;letter-spacing:.1em;margin-bottom:.4rem">YANGO <span style="color:var(--red)">TECH</span></div>
+  <p>Technology for national development · 35+ countries · Dubai, UAE</p>
+  <p style="margin-top:.8rem;font-size:.75rem;color:#555">Confidential — Prepared for the African Ambassadors Event, Moscow 2026</p>
+</footer>
+
+</body>
+</html>
