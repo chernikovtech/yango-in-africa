@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yango Tech — Technology for Africa's National Development</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+  :root {
+    --red: #FF1A1A;
+    --black: #141414;
+    --white: #FFFFFF;
+    --gray-text: #7A7A7A;
+    --gray-bg: #F5F5F5;
+    --gray-border: #E5E5E5;
+    --dark-card: #1E1E1E;
+    --font-headline: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --radius: 1rem;
+    --max-w: 1280px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(20,20,20,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--red);
+  }
+  .nav-inner {
+    max-width: var(--max-w); margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.8rem 2rem;
+  }
+  .logo { font-weight: 900; font-size: 1.3rem; color: var(--white); letter-spacing: 0.15em; }
+  .logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .nav-links a {
+    color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    background: var(--black);
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -50%; right: -20%; width: 80%; height: 200%;
+    background: radial-gradient(ellipse, rgba(255,26,26,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: var(--max-w); margin: 0 auto; position: relative; z-index: 1;
+    width: 100%;
+  }
+  .hero-tag {
+    color: var(--red); font-size: 0.9rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    animation: fadeUp 0.8s ease-out;
+  }
+  .hero h1 {
+    font-family: var(--font-headline);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.05;
+    max-width: 900px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease-out 0.1s both;
+  }
+  .hero p {
+    color: var(--gray-text);
+    font-size: 1.15rem;
+    max-width: 700px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s ease-out 0.2s both;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s ease-out 0.3s both;
+  }
+  .hero-stat .num {
+    font-size: 2.5rem; font-weight: 900; color: var(--red);
+    line-height: 1;
+  }
+  .hero-stat .label { color: var(--gray-text); font-size: 0.85rem; margin-top: 0.3rem; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: var(--max-w); margin: 0 auto; }
+  .section-tag {
+    color: var(--red); font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: var(--font-headline);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-subtitle {
+    color: var(--gray-text);
+    font-size: 1.05rem;
+    max-width: 700px;
+    margin-bottom: 3rem;
+  }
+
+  /* DARK SECTIONS */
+  .dark-section { background: var(--black); color: var(--white); }
+  .dark-section .section-subtitle { color: #999; }
+
+  /* PILLARS GRID */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+  .pillar-card {
+    background: var(--gray-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    border-top: 3px solid var(--red);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .pillar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+  .pillar-icon {
+    width: 48px; height: 48px;
+    background: var(--black);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.3rem; color: var(--white);
+  }
+  .pillar-card h3 {
+    font-size: 1.2rem; font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .pillar-card p { color: var(--gray-text); font-size: 0.9rem; }
+
+  /* SOLUTION DEEP DIVE */
+  .solution-section { padding: 5rem 2rem; }
+  .solution-section:nth-child(even) { background: var(--gray-bg); }
+
+  .solution-header { margin-bottom: 3rem; }
+  .solution-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .solution-features { display: flex; flex-direction: column; gap: 1.5rem; }
+  .feature-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .feature-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    background: var(--red);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 1.1rem;
+  }
+  .feature-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .feature-item p { color: var(--gray-text); font-size: 0.88rem; }
+
+  .impact-box {
+    background: var(--black);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    color: var(--white);
+  }
+  .impact-box h3 { color: var(--red); font-size: 1.2rem; font-weight: 800; margin-bottom: 1.5rem; }
+  .impact-stat {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #333;
+  }
+  .impact-stat:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
+  .impact-stat .num {
+    font-size: 1.8rem; font-weight: 900; color: var(--red);
+    min-width: 100px;
+  }
+  .impact-stat .desc { color: #aaa; font-size: 0.9rem; }
+
+  /* PPP SECTION */
+  .ppp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .ppp-card {
+    background: var(--dark-card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    border-left: 3px solid var(--red);
+  }
+  .ppp-card h3 { color: var(--red); font-size: 1.1rem; font-weight: 800; margin-bottom: 0.6rem; }
+  .ppp-card p { color: #aaa; font-size: 0.9rem; }
+
+  /* ENGAGEMENT MODEL */
+  .steps-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .step-card {
+    background: var(--gray-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    text-align: center;
+    border-top: 3px solid var(--red);
+    position: relative;
+  }
+  .step-num {
+    font-size: 2.5rem; font-weight: 900; color: var(--red);
+    margin-bottom: 0.5rem; line-height: 1;
+  }
+  .step-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .step-card p { color: var(--gray-text); font-size: 0.85rem; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--red);
+    color: var(--white);
+    text-align: center;
+    padding: 5rem 2rem;
+  }
+  .cta-section h2 {
+    font-family: var(--font-headline);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+  }
+  .cta-section p { font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; opacity: 0.9; }
+  .cta-btn {
+    display: inline-block;
+    background: var(--black);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: var(--gray-text);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  footer .logo { margin-bottom: 0.5rem; display: block; }
+
+  /* EXPANDABLE SECTIONS */
+  .expand-trigger {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--red);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 0.8rem;
+    border: none;
+    background: none;
+    font-family: inherit;
+  }
+  .expand-trigger:hover { text-decoration: underline; }
+  .expand-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s;
+    opacity: 0;
+  }
+  .expand-content.open {
+    max-height: 2000px;
+    opacity: 1;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .solution-grid { grid-template-columns: 1fr; }
+    .steps-row { grid-template-columns: repeat(2, 1fr); }
+    .hero-stats { gap: 2rem; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .steps-row { grid-template-columns: 1fr; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: column; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">YANGO <span>TECH</span></div>
+    <div class="nav-links">
+      <a href="#solutions">Solutions</a>
+      <a href="medtech.html">MedTech</a>
+      <a href="transport.html">Transport</a>
+      <a href="contact-center.html">Contact Centers</a>
+      <a href="fintech.html">FinTech</a>
+      <a href="gov-services.html">Government</a>
+      <a href="energy.html">Energy</a>
+      <a href="cloud.html">Cloud & AI</a>
+      <a href="#how">How We Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Yango Tech × Africa</div>
+    <h1>Technology for Africa's National Development</h1>
+    <p>Production-grade AI, cloud infrastructure, and digital platforms — deployed across 35+ countries, now powering Africa's digital transformation in healthcare, transport, finance, and government.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">35+</div><div class="label">Countries</div></div>
+      <div class="hero-stat"><div class="num">30+</div><div class="label">Offices worldwide</div></div>
+      <div class="hero-stat"><div class="num">32K</div><div class="label">Engineers & specialists</div></div>
+      <div class="hero-stat"><div class="num">26M+</div><div class="label">Daily trips processed</div></div>
+      <div class="hero-stat"><div class="num">16+</div><div class="label">African countries with operations</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AFRICA PRESENCE -->
+<section style="background:var(--gray-bg); padding: 4rem 2rem;">
+  <div class="section-inner">
+    <div class="section-tag">Our African Footprint</div>
+    <h2 class="section-title">Already on the ground across the continent</h2>
+    <p class="section-subtitle">From ride-hailing services in 16+ countries to government-level partnerships, banking integrations, and healthcare pilots — Yango Tech is building Africa's digital backbone.</p>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+      <div style="background:var(--black); padding:2rem; border-radius:var(--radius);">
+        <div style="color:var(--red); font-size:2rem; font-weight:900;">10+</div>
+        <div style="color:#aaa; font-size:0.9rem;">Markets with active B2B partnerships in banking, telecom, government, and enterprise</div>
+      </div>
+      <div style="background:var(--black); padding:2rem; border-radius:var(--radius);">
+        <div style="color:var(--red); font-size:2rem; font-weight:900;">5+</div>
+        <div style="color:#aaa; font-size:0.9rem;">Ministerial-level engagements with Technology, ICT, and Health ministries</div>
+      </div>
+      <div style="background:var(--black); padding:2rem; border-radius:var(--radius);">
+        <div style="color:var(--red); font-size:2rem; font-weight:900;">6</div>
+        <div style="color:#aaa; font-size:0.9rem;">African nations participating in Yango STEM Fellowship — 30+ fellows, ZMW 1.6M+ invested</div>
+      </div>
+      <div style="background:var(--black); padding:2rem; border-radius:var(--radius);">
+        <div style="color:var(--red); font-size:2rem; font-weight:900;">Active</div>
+        <div style="color:#aaa; font-size:0.9rem;">Partnerships with major African banks, telecoms, and development finance institutions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS OVERVIEW -->
+<section id="solutions">
+  <div class="section-inner">
+    <div class="section-tag">What We Bring</div>
+    <h2 class="section-title">Seven pillars for national development</h2>
+    <p class="section-subtitle">Production-grade solutions designed for emerging market realities — low infrastructure, mobile-first populations, and the need for data sovereignty.</p>
+    <div class="pillars-grid">
+      <a href="medtech.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
+        <div class="pillar-icon">🏥</div>
+        <h3>MedTech & Healthcare AI</h3>
+        <p>National Medical ID platforms, AI clinical tools, appointment transcription, home diagnostic devices, health analytics dashboards</p>
+        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+      </div></a>
+      <a href="transport.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
+        <div class="pillar-icon">🚌</div>
+        <h3>Smart City & Public Transport</h3>
+        <p>Digital ticketing, route optimization, fleet management, real-time passenger information, ride-hailing at scale</p>
+        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+      </div></a>
+      <a href="contact-center.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
+        <div class="pillar-icon">🎧</div>
+        <h3>AI Contact Centers</h3>
+        <p>Multilingual AI voice assistants, 80% auto-handling rate, customer value management, automated quality evaluation</p>
+        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+      </div></a>
+      <a href="fintech.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
+        <div class="pillar-icon">💳</div>
+        <h3>FinTech & Digital Payments</h3>
+        <p>AI credit scoring, e-KYC, mobile money integration, nano lending, fleet financing, micro-insurance</p>
+        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+      </div></a>
+      <a href="gov-services.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
+        <div class="pillar-icon">🏛️</div>
+        <h3>Government Digital Services</h3>
+        <p>G2C/G2B portals with 420+ services, digital ID, AI chatbots for citizens, tax & revenue systems, analytics</p>
+        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+      </div></a>
+      <a href="energy.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
+        <div class="pillar-icon">⚡</div>
+        <h3>Smart Grid & Energy AI</h3>
+        <p>Grid monitoring, revenue protection, predictive asset management, AI customer service — for national power utilities</p>
+        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+      </div></a>
+      <a href="cloud.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
+        <div class="pillar-icon">☁️</div>
+        <h3>Sovereign AI & Cloud</h3>
+        <p>National data centers, self-developed hyperscale platform, GPU orchestration, data sovereignty, ~30% TCO savings vs hyperscalers</p>
+        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+      </div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEDTECH DEEP DIVE ===== -->
+<section id="medtech" class="solution-section" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="solution-header">
+      <div class="section-tag">Solution Deep Dive</div>
+      <h2 class="section-title">MedTech & Healthcare AI</h2>
+      <p class="section-subtitle">Transforming healthcare from fragmented services into centrally governed, AI-driven national assets. Our Medical ID platform creates a mandatory digital health identity for all citizens under one trusted system.</p>
+    </div>
+    <div class="solution-grid">
+      <div class="solution-features">
+        <div class="feature-item">
+          <div class="feature-icon">🩺</div>
+          <div><h4>National Medical ID Platform</h4><p>Mandatory digital health identity combining AI healthcare, data governance, and real-time epidemiological monitoring. Deployed at national scale with sovereign cloud infrastructure.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎙️</div>
+          <div><h4>Appointment Transcription & Summarization</h4><p>AI records and summarizes doctor-patient consultations, sending structured summaries directly to EMR. Eliminates ~50% of administrative documentation time using SpeechKit and YangoGPT.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔍</div>
+          <div><h4>Smart EMR Search</h4><p>Natural language queries across entire patient medical records — lab results, previous visits, prescriptions — with answers in seconds instead of minutes of manual searching.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📱</div>
+          <div><h4>Home Diagnostic Devices</h4><p>Digital stethoscope and otoscope with AI assistance. Mobile application for patients, rural nurses, and paramedics with HMIS integration. 80% pathology detection accuracy, 95% for heart murmurs.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📊</div>
+          <div><h4>DataLens Health Analytics</h4><p>90+ dashboards deployed for healthcare administration — covering personnel, pathologies, equipment, finance, and departmental performance. Used for epidemic monitoring, bed availability, and resource optimization.</p></div>
+        </div>
+
+        <button class="expand-trigger" onclick="toggleExpand('medtech-extra')">
+          More: Knowledge Base, Federated Learning, Fetal Diagnostics ▾
+        </button>
+        <a href="medtech.html" style="display:inline-block;color:var(--red);font-weight:700;font-size:.9rem;margin-top:1rem;text-decoration:none">View full MedTech interactive demo →</a>
+        <div id="medtech-extra" class="expand-content">
+          <div style="display:flex; flex-direction:column; gap:1.5rem; padding-top:1rem;">
+            <div class="feature-item">
+              <div class="feature-icon">📚</div>
+              <div><h4>Medical Knowledge Base Search</h4><p>AI-powered search across trusted medical literature — both restricted and open sources. Provides verified, source-cited answers for clinical decision support. Deployed with 122+ medical document sources.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🧬</div>
+              <div><h4>Federated Learning in Medicine</h4><p>Secure collaborative AI training where each hospital trains locally and shares only anonymized model parameters. Raw patient data never leaves the facility. Jointly developed with Sechenov University.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">👶</div>
+              <div><h4>Fetal Disease Diagnostics</h4><p>Neural network analyzing ultrasound images for early detection of rare conditions like spina bifida. 6,000+ images processed, diagnosis time reduced from weeks to seconds. Online training for 5,000+ specialists.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">💊</div>
+              <div><h4>Subsidized Medication Automation</h4><p>AI-powered eligibility verification and justification drafting for subsidized prescriptions — reducing documentation time and minimizing errors in complex regulatory compliance.</p></div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">☁️</div>
+              <div><h4>Biobank Cloud Platform</h4><p>Rapid search and secure processing of clinical data. 21M+ medical documents uploaded, 150+ search parameters, 10-second average processing time for data export.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="impact-box">
+        <h3>PROVEN IMPACT</h3>
+        <div class="impact-stat"><div class="num">40–60%</div><div class="desc">Faster outbreak detection and response via real-time epidemiological monitoring</div></div>
+        <div class="impact-stat"><div class="num">15–25%</div><div class="desc">Lower medication leakage through drug utilization tracking and formulary optimization</div></div>
+        <div class="impact-stat"><div class="num">8–15%</div><div class="desc">Reduction in healthcare fraud and over-treatment, lowering avoidable expenditure</div></div>
+        <div class="impact-stat"><div class="num">50%</div><div class="desc">Doctor administrative time saved through AI transcription and smart search</div></div>
+        <div class="impact-stat"><div class="num">80%</div><div class="desc">Pathology detection accuracy with home diagnostic AI devices</div></div>
+        <div class="impact-stat"><div class="num">90+</div><div class="desc">Health analytics dashboards deployed across 5 specializations at national scale</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRANSPORT DEEP DIVE ===== -->
+<section id="transport" class="solution-section" style="background:var(--gray-bg);">
+  <div class="section-inner">
+    <div class="solution-header">
+      <div class="section-tag">Solution Deep Dive</div>
+      <h2 class="section-title">Smart City & Public Transport</h2>
+      <p class="section-subtitle">From ride-hailing operations in 16+ African countries to national public transit digitalization — we bring proven mobility technology to government transport systems.</p>
+    </div>
+    <div class="solution-grid">
+      <div class="solution-features">
+        <div class="feature-item">
+          <div class="feature-icon">🎫</div>
+          <div><h4>Public Transport Ticketing</h4><p>End-to-end digital ticketing for buses, BRT, and minibus networks. QR code, NFC, and mobile money payment integration. Real-time revenue tracking and anti-fraud controls.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🗺️</div>
+          <div><h4>Proprietary Maps & Navigation</h4><p>Our own mapping platform deployed across Africa — routing, geocoding, address systems, and digital addressing. No dependency on Google Maps or third-party providers.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🚍</div>
+          <div><h4>Route Optimization & Scheduling</h4><p>AI-powered demand prediction and dynamic scheduling to maximize ridership, reduce empty running, and cut wait times. Adapts to real-time traffic and demand patterns.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📡</div>
+          <div><h4>Real-Time Passenger Information</h4><p>Live bus tracking apps for citizens — showing arrival times, route maps, and service alerts. Reduces uncertainty and increases public transport adoption.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🚛</div>
+          <div><h4>Fleet Management & Logistics</h4><p>Vehicle tracking, fuel analytics, predictive maintenance, and driver management. Used by mining companies, energy firms, and government vehicle fleets.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🚕</div>
+          <div><h4>Ride-Hailing Platform</h4><p>Production-grade ride-hailing technology already operating in 16+ African countries — ready to integrate with or complement public transit systems.</p></div>
+        </div>
+      </div>
+      <div class="impact-box">
+        <h3>SCALE & PROOF</h3>
+        <div class="impact-stat"><div class="num">16+</div><div class="desc">African countries with live ride-hailing operations today</div></div>
+        <div class="impact-stat"><div class="num">26M+</div><div class="desc">Daily trips processed across our global mobility ecosystem</div></div>
+        <div class="impact-stat"><div class="num">50M+</div><div class="desc">Daily transactions handled by our payment infrastructure</div></div>
+        <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid #333;">
+          <h4 style="color:var(--red); font-size:1rem; margin-bottom:0.8rem;">WHY GOVERNMENTS CHOOSE US</h4>
+          <p style="color:#aaa; font-size:0.88rem; margin-bottom:0.6rem;">✓ Already operational in your country — proven local market knowledge</p>
+          <p style="color:#aaa; font-size:0.88rem; margin-bottom:0.6rem;">✓ Own mapping infrastructure — no third-party licensing costs</p>
+          <p style="color:#aaa; font-size:0.88rem; margin-bottom:0.6rem;">✓ Mobile-money-first design for unbanked populations</p>
+          <p style="color:#aaa; font-size:0.88rem;">✓ Revenue share model — aligned incentives with government</p>
+          <a href="transport.html" style="display:inline-block;color:var(--red);font-weight:700;font-size:.9rem;margin-top:1.5rem;text-decoration:none">View full Transport interactive demo →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI CONTACT CENTERS ===== -->
+<section id="contact-center" class="solution-section" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="solution-header">
+      <div class="section-tag">Solution Deep Dive</div>
+      <h2 class="section-title">AI Contact Centers & Customer Value Management</h2>
+      <p class="section-subtitle">Multilingual AI voice assistants that handle 80% of interactions automatically — reducing costs by 65% while tripling customer reachability for telecoms, banks, and government agencies.</p>
+    </div>
+    <div class="solution-grid">
+      <div class="solution-features">
+        <div class="feature-item">
+          <div class="feature-icon">🗣️</div>
+          <div><h4>Multilingual AI Voice Assistants</h4><p>Inbound and outbound AI voice agents fluent in local African languages, English, French, Portuguese, and Arabic. Natural conversation with seamless human escalation for complex cases.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📈</div>
+          <div><h4>Customer Value Management</h4><p>AI-driven upsell, cross-sell, and retention for telecom operators and banks. Churn prediction, campaign micro-targeting, and real-time offer engines integrated with existing CRM.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✅</div>
+          <div><h4>Automated Quality & Compliance</h4><p>Every conversation evaluated automatically — sentiment analysis, compliance checking, agent scoring. Real-time alerts for escalation triggers.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🏛️</div>
+          <div><h4>Government Citizen Services</h4><p>AI-powered citizen inquiry lines — handling everything from license renewals to tax questions. Integrates with back-end government systems for real-time resolution.</p></div>
+        </div>
+      </div>
+      <div class="impact-box">
+        <h3>IMPACT METRICS</h3>
+        <div class="impact-stat"><div class="num">80%</div><div class="desc">Auto-handling rate on first contact — reducing human agent load</div></div>
+        <div class="impact-stat"><div class="num">65%</div><div class="desc">Cost reduction in contact center operations</div></div>
+        <div class="impact-stat"><div class="num">3×</div><div class="desc">Improvement in customer reachability for outbound campaigns</div></div>
+        <div class="impact-stat"><div class="num">40%</div><div class="desc">Higher conversion on outbound upsell campaigns</div></div>
+        <div class="impact-stat"><div class="num">8 wks</div><div class="desc">Time to measurable NPS improvement from pilot kickoff</div></div>
+        <a href="contact-center.html" style="display:inline-block;color:var(--red);font-weight:700;font-size:.9rem;margin-top:1.5rem;text-decoration:none">View full Contact Center demo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINTECH ===== -->
+<section id="fintech" class="solution-section" style="background:var(--gray-bg);">
+  <div class="section-inner">
+    <div class="solution-header">
+      <div class="section-tag">Solution Deep Dive</div>
+      <h2 class="section-title">FinTech & Digital Payments</h2>
+      <p class="section-subtitle">Partnering with banks, mobile network operators, and governments to expand financial inclusion — from AI credit scoring for thin-file borrowers to micro-insurance distributed via mobile operators.</p>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap:1.5rem;">
+      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+        <h4 style="font-weight:800; margin-bottom:0.5rem;">🛡️ AI Credit Scoring</h4>
+        <p style="color:var(--gray-text); font-size:0.9rem;">Alternative data models for thin-file borrowers — using mobile money transaction history, telco data, behavioral signals, and social patterns to assess creditworthiness where traditional bureau data doesn't exist.</p>
+      </div>
+      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+        <h4 style="font-weight:800; margin-bottom:0.5rem;">📱 e-KYC & Digital Onboarding</h4>
+        <p style="color:var(--gray-text); font-size:0.9rem;">Full digital customer onboarding — document verification, liveness detection, biometric matching. Compliant with local regulations. Reduces onboarding from days to minutes.</p>
+      </div>
+      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+        <h4 style="font-weight:800; margin-bottom:0.5rem;">💰 Mobile Money Integration</h4>
+        <p style="color:var(--gray-text); font-size:0.9rem;">Collections and disbursements via M-Pesa, Airtel Money, and local mobile wallet providers. Seamless API integration for banks and merchants. Built for markets with 70%+ mobile money penetration.</p>
+      </div>
+      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+        <h4 style="font-weight:800; margin-bottom:0.5rem;">⚡ Nano & Micro Lending</h4>
+        <p style="color:var(--gray-text); font-size:0.9rem;">AI-powered instant loan decisioning for amounts from $5 to $500. Automated risk assessment, disbursement, and mobile money repayment collection. Sub-second decision time.</p>
+      </div>
+      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+        <h4 style="font-weight:800; margin-bottom:0.5rem;">🚗 Fleet & Asset Financing</h4>
+        <p style="color:var(--gray-text); font-size:0.9rem;">Vehicle and 3-wheeler financing with GPS tracking, usage-based insurance, and automated mobile money repayment. Enables asset ownership for drivers and small businesses.</p>
+      </div>
+      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+        <h4 style="font-weight:800; margin-bottom:0.5rem;">🏥 Micro-Insurance</h4>
+        <p style="color:var(--gray-text); font-size:0.9rem;">Health, life, device, and crop protection products — embedded distribution via mobile operators and banks. Low-premium, high-volume models designed for emerging market populations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GOVERNMENT ===== -->
+<section id="gov" class="dark-section solution-section">
+  <div class="section-inner">
+    <div class="solution-header">
+      <div class="section-tag">Solution Deep Dive</div>
+      <h2 class="section-title" style="color:var(--white);">Government Digital Services</h2>
+      <p class="section-subtitle">Enabling e-Government transformation with production-grade platforms already deployed at national scale — serving millions of citizens and hundreds of government agencies.</p>
+    </div>
+    <div class="solution-grid">
+      <div class="solution-features">
+        <div class="feature-item">
+          <div class="feature-icon">🖥️</div>
+          <div><h4 style="color:var(--white);">G2C & G2B Digital Portal</h4><p style="color:#aaa;">Unified citizen-facing portal with 420+ public services in digital format — business licenses, passport renewals, permit applications, tax filings. Deployed and serving millions at national scale.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🤖</div>
+          <div><h4 style="color:var(--white);">AI Assistant for Government</h4><p style="color:#aaa;">AI chatbot handling G2C and G2B inquiries, integrated with government portals and backend systems. Plus: analytics assistant that generates dashboards without SQL or IT support.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔎</div>
+          <div><h4 style="color:var(--white);">Smart Search Across Portals</h4><p style="color:#aaa;">AI assistant answering natural language queries across structured data, PDFs, scanned documents, and knowledge bases — making government information instantly accessible.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🪪</div>
+          <div><h4 style="color:var(--white);">Digital Identity & Integration</h4><p style="color:#aaa;">National digital ID systems enabling data sharing and instant verification across government agencies. Foundation for financial inclusion, healthcare access, and social protection programs.</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💵</div>
+          <div><h4 style="color:var(--white);">Tax & Revenue Systems</h4><p style="color:#aaa;">AI-powered systems to withhold tax at the moment of transaction, improve collection rates, and reduce leakage. Real-time payment interoperability across banks and mobile money.</p></div>
+        </div>
+      </div>
+      <div class="impact-box" style="background:var(--dark-card);">
+        <h3>WHY THIS MATTERS</h3>
+        <div style="margin-bottom:1.5rem;">
+          <p style="color:#aaa; font-size:0.95rem; margin-bottom:1rem;">Africa's governments are rapidly digitizing. The countries that move fastest will see:</p>
+        </div>
+        <div class="impact-stat"><div class="num">420+</div><div class="desc">Government services brought online in a single unified portal</div></div>
+        <div class="impact-stat"><div class="num">24/7</div><div class="desc">Citizen service availability via AI assistants — no queues, no office hours</div></div>
+        <div class="impact-stat"><div class="num">Real-time</div><div class="desc" style="font-size:0.85rem;">Revenue oversight, expenditure tracking, and performance monitoring for ministers</div></div>
+        <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid #333;">
+          <p style="color:var(--red); font-weight:700; font-size:0.9rem;">ALIGNMENT WITH AFRICAN DIGITAL AGENDAS</p>
+          <p style="color:#888; font-size:0.85rem; margin-top:0.5rem;">Our solutions align with the African Union's Digital Transformation Strategy, Smart Africa Alliance objectives, and individual national ICT masterplans.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLOUD ===== -->
+<section id="cloud" class="solution-section" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="solution-header">
+      <div class="section-tag">Solution Deep Dive</div>
+      <h2 class="section-title">Sovereign AI & Cloud Infrastructure</h2>
+      <p class="section-subtitle">Self-developed, full-stack cloud platform — no dependency on third-party vendors. Designed for data sovereignty, regulatory compliance, and competitive pricing.</p>
+    </div>
+    <div class="solution-grid">
+      <div>
+        <h3 style="font-weight:800; margin-bottom:1.5rem;">Full-Stack Cloud Platform</h3>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="background:var(--red); color:white; padding:1rem 1.5rem; border-radius:var(--radius) var(--radius) 0 0; font-weight:700;">Applications (SaaS) — Business tools, marketplace</div>
+          <div style="background:#333; color:white; padding:1rem 1.5rem; font-weight:600;">Platform Services (PaaS) — Containers, ML, data platform</div>
+          <div style="background:#555; color:white; padding:1rem 1.5rem; font-weight:600;">Infrastructure (IaaS) — Compute, storage, network, security</div>
+          <div style="background:#777; color:white; padding:1rem 1.5rem; border-radius:0 0 var(--radius) var(--radius); font-weight:600;">Data Centers — In-house designed server racks</div>
+        </div>
+        <div style="margin-top:2rem;">
+          <h4 style="font-weight:800; margin-bottom:1rem;">On-Premise Products</h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div style="background:var(--gray-bg); padding:1rem; border-radius:0.5rem;"><strong>YDB</strong><br><span style="color:var(--gray-text); font-size:0.85rem;">Distributed database for complex data processing</span></div>
+            <div style="background:var(--gray-bg); padding:1rem; border-radius:0.5rem;"><strong>DataLens</strong><br><span style="color:var(--gray-text); font-size:0.85rem;">Data visualization and interactive reporting</span></div>
+            <div style="background:var(--gray-bg); padding:1rem; border-radius:0.5rem;"><strong>YTsaurus</strong><br><span style="color:var(--gray-text); font-size:0.85rem;">MapReduce, dynamic tables, batch processing</span></div>
+            <div style="background:var(--gray-bg); padding:1rem; border-radius:0.5rem;"><strong>AI Studio</strong><br><span style="color:var(--gray-text); font-size:0.85rem;">ML development, LLM APIs, cognitive services</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="impact-box">
+        <h3>KEY DIFFERENTIATORS</h3>
+        <div class="impact-stat"><div class="num" style="font-size:1.2rem; min-width:130px;">🛡️ Sovereign</div><div class="desc">Full data residency compliance. Local regulation and industry certification.</div></div>
+        <div class="impact-stat"><div class="num" style="font-size:1.2rem; min-width:130px;">🔧 Self-Built</div><div class="desc">No dependency on third-party software vendors. Fully in-house developed hyperscale platform.</div></div>
+        <div class="impact-stat"><div class="num" style="font-size:1.2rem; min-width:130px;">🧠 AI-Native</div><div class="desc">ML data scientist tools, cognitive services, LLM APIs and playground — built into the platform.</div></div>
+        <div class="impact-stat"><div class="num" style="font-size:1.2rem; min-width:130px;">💰 ~30% Savings</div><div class="desc">Average TCO savings compared to AWS, GCP, and Azure.</div></div>
+        <div class="impact-stat"><div class="num" style="font-size:1.2rem; min-width:130px;">🤝 Flexible</div><div class="desc">Open to reseller, solution partner, or strategic partnership models.</div></div>
+        <div class="impact-stat"><div class="num" style="font-size:1.2rem; min-width:130px;">⚙️ Hardware</div><div class="desc">In-house designed server racks and hardware. Full supply chain management and R&D.</div></div>
+        <a href="cloud.html" style="display:inline-block;color:var(--red);font-weight:700;font-size:.9rem;margin-top:1.5rem;text-decoration:none">View full Sovereign Cloud deep dive →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW WE WORK ===== -->
+<section id="how" style="background:var(--gray-bg); padding:5rem 2rem;">
+  <div class="section-inner">
+    <div class="section-tag">Engagement Model</div>
+    <h2 class="section-title">How we work with governments</h2>
+    <p class="section-subtitle">Flexible models designed for African government procurement realities — low-risk entry, measurable outcomes, and knowledge transfer built in from day one.</p>
+
+    <div class="steps-row">
+      <div class="step-card"><div class="step-num">01</div><h3>Map Current State</h3><p>Analyze processes, systems, and pain points. Produce comprehensive as-is documentation.</p></div>
+      <div class="step-card"><div class="step-num">02</div><h3>Find Best Fit</h3><p>Identify gaps, select tools, and define a phased implementation roadmap.</p></div>
+      <div class="step-card"><div class="step-num">03</div><h3>Quantify Impact</h3><p>Model improvements in time, cost, and quality. Build robust business case with ROI.</p></div>
+      <div class="step-card"><div class="step-num">04</div><h3>Run Focused Pilot</h3><p>4–8 week PoC. Measure results. Refine for full-scale national rollout.</p></div>
+    </div>
+
+    <h3 style="font-weight:800; font-size:1.3rem; margin-bottom:1.5rem;">Public-Private Partnership Structures</h3>
+    <div class="ppp-grid">
+      <div class="ppp-card"><h3>Technology Transfer</h3><p>We deploy, train local teams, and transfer operational ownership over 12–24 months. Builds sovereign capability.</p></div>
+      <div class="ppp-card"><h3>Joint Venture</h3><p>Shared-ownership entities with local partners for long-term revenue participation. Aligned incentives.</p></div>
+      <div class="ppp-card"><h3>Managed Services</h3><p>Full SLA-based operation of digital infrastructure on behalf of government. Revenue-share / OPEX model.</p></div>
+      <div class="ppp-card"><h3>Consortium Model</h3><p>Teaming with local systems integrators and financing partners for large-scale national tenders.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-section">
+  <h2>START SMALL. PROVE VALUE. SCALE FAST.</h2>
+  <p>We invite each nation to begin with a bilateral discussion to identify which solutions best fit your country's digital transformation priorities.</p>
+  <a class="cta-btn" href="mailto:eechernikov@yango-team.com">Schedule a Discussion →</a>
+  <div style="margin-top:2rem; opacity:0.8;">
+    <strong>Evgeny Chernikov</strong> · Chief Operating Officer<br>
+    eechernikov@yango-team.com
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">YANGO <span style="color:var(--red);">TECH</span></div>
+  <p style="margin-top:0.5rem;">Technology for national development · 35+ countries · Dubai, UAE</p>
+  <p style="margin-top:1rem; font-size:0.8rem; color:#555;">Confidential — Prepared for the African Ambassadors Event, Moscow 2026</p>
+</footer>
+
+<script>
+function toggleExpand(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+  const btn = el.previousElementSibling;
+  if (el.classList.contains('open')) {
+    btn.innerHTML = btn.innerHTML.replace('▾', '▴');
+  } else {
+    btn.innerHTML = btn.innerHTML.replace('▴', '▾');
+  }
+}
+
+// Scroll-triggered animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.pillar-card, .feature-item, .step-card, .ppp-card, .impact-stat').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
