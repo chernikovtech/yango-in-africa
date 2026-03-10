@@ -1,0 +1,4 @@
+.git
+*.pptx
+Dockerfile
+.dockerignore
