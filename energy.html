@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{--red:#FF1A1A;--black:#141414;--white:#FFF;--gray:#7A7A7A;--gray-bg:#F5F5F5;--dark:#1E1E1E;--radius:1rem;--max-w:1280px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--black);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(20,20,20,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--red)}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.7rem 2rem}
+.logo{font-weight:900;font-size:1.2rem;color:var(--white);letter-spacing:.12em;text-decoration:none}
+.logo span{color:var(--red)}
+.nav-back{color:#ccc;text-decoration:none;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.4rem}
+.nav-back:hover{color:var(--white)}
+section{padding:4rem 2rem}
+.inner{max-width:var(--max-w);margin:0 auto}
+.tag{color:var(--red);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
+.hero-sub{background:var(--black);min-height:50vh;display:flex;align-items:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-sub::before{content:'';position:absolute;top:-40%;right:-15%;width:70%;height:180%;background:radial-gradient(ellipse,rgba(255,26,26,.07)0%,transparent 70%);pointer-events:none}
+.hero-sub .inner{position:relative;z-index:1;width:100%}
+.hero-sub h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:var(--white);line-height:1.05;max-width:800px;margin-bottom:1rem}
+.hero-sub .subtitle{color:var(--gray);font-size:1.1rem;max-width:650px;margin-bottom:2rem}
+.stats-row{display:flex;gap:2.5rem;flex-wrap:wrap}
+.stat .n{font-size:2rem;font-weight:900;color:var(--red);line-height:1}
+.stat .l{color:var(--gray);font-size:.82rem;margin-top:.2rem}
+h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;line-height:1.1;margin-bottom:.8rem}
+h3{font-size:1.15rem;font-weight:800;margin-bottom:.5rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.card{background:var(--gray-bg);border-radius:var(--radius);padding:2rem;border-top:3px solid var(--red);transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.card h4{font-weight:800;margin-bottom:.4rem}
+.card p{color:var(--gray);font-size:.88rem}
+.dark-card{background:var(--dark);border-radius:var(--radius);padding:2rem;color:var(--white)}
+.dark-card h3{color:var(--red)}
+.dark-card p{color:#aaa;font-size:.9rem}
+.metric-row{display:flex;gap:.5rem;align-items:baseline;padding:1rem 0;border-bottom:1px solid #333}
+.metric-row:last-child{border:none}
+.metric-row .n{font-size:1.6rem;font-weight:900;color:var(--red);min-width:90px}
+.metric-row .d{color:#aaa;font-size:.88rem}
+.feat{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem}
+.feat-icon{width:44px;height:44px;min-width:44px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem}
+.feat h4{font-size:.95rem;font-weight:700;margin-bottom:.2rem}
+.feat p{color:var(--gray);font-size:.85rem}
+.accent-bar{width:100%;height:3px;background:var(--red);margin:3rem 0}
+.cta-bar{background:var(--red);color:white;text-align:center;padding:3.5rem 2rem;margin-top:3rem}
+.cta-bar h2{color:white;margin-bottom:.8rem}
+.cta-bar p{max-width:550px;margin:0 auto 1.5rem;opacity:.9;font-size:1rem}
+.cta-btn{display:inline-block;background:var(--black);color:var(--white);padding:.9rem 2.2rem;border-radius:var(--radius);text-decoration:none;font-weight:700;transition:transform .2s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:center;font-size:.82rem}
+/* Dashboard widgets */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.dash-card{background:var(--dark);border-radius:.8rem;padding:1.5rem;color:white}
+.dash-card .change{font-size:.75rem;padding:.15rem .5rem;border-radius:4px;display:inline-block;margin-bottom:.5rem}
+.dash-card .change.up{background:rgba(34,197,94,.15);color:#22c55e}
+.dash-card .change.down{background:rgba(239,68,68,.15);color:#ef4444}
+.dash-card .val{font-size:1.8rem;font-weight:900;margin-bottom:.2rem}
+.dash-card .lbl{color:#888;font-size:.8rem}
+.alert-list{display:flex;flex-direction:column;gap:.8rem}
+.alert{background:var(--dark);border-radius:.8rem;padding:1.2rem;display:flex;gap:1rem;align-items:flex-start;border-left:3px solid var(--red)}
+.alert.warn{border-left-color:#f59e0b}
+.alert.info{border-left-color:#3b82f6}
+.alert .dot{width:10px;height:10px;border-radius:50%;background:var(--red);margin-top:5px;min-width:10px}
+.alert.warn .dot{background:#f59e0b}
+.alert.info .dot{background:#3b82f6}
+.alert h5{color:white;font-size:.88rem;font-weight:700}
+.alert p{color:#888;font-size:.8rem;margin-top:.2rem}
+.bar-chart{display:flex;gap:.5rem;align-items:flex-end;height:120px;margin-top:1rem}
+.bar-chart .bar{flex:1;background:var(--red);border-radius:4px 4px 0 0;position:relative;transition:height .8s ease}
+.bar-chart .bar-label{text-align:center;font-size:.65rem;color:#888;margin-top:.3rem}
+.chat-demo{background:var(--dark);border-radius:var(--radius);padding:1.5rem;max-width:450px}
+.chat-msg{padding:.8rem 1rem;border-radius:.8rem;margin-bottom:.5rem;font-size:.85rem;max-width:85%}
+.chat-msg.user{background:#333;color:white;margin-left:auto}
+.chat-msg.bot{background:var(--red);color:white}
+.chat-msg.bot.subtle{background:#2a2a2a;color:#ccc}
+.process-steps{display:flex;gap:0;margin:2rem 0}
+.step{flex:1;text-align:center;padding:1.5rem 1rem;position:relative}
+.step::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--red);font-size:1.5rem;font-weight:900}
+.step:last-child::after{display:none}
+.step .num{font-size:2rem;font-weight:900;color:var(--red);margin-bottom:.3rem}
+.step h4{font-size:.85rem;font-weight:700}
+.step p{font-size:.75rem;color:var(--gray)}
+.arch-layer{padding:1rem 1.5rem;font-weight:600;color:white;font-size:.9rem}
+.arch-layer:first-child{border-radius:var(--radius) var(--radius) 0 0}
+.arch-layer:last-child{border-radius:0 0 var(--radius) var(--radius)}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}.stats-row{gap:1.5rem}.process-steps{flex-direction:column}.step::after{display:none}}
+@media(max-width:600px){.dash-grid{grid-template-columns:1fr}}
+</style>
+
+<title>Smart Grid & Energy AI — Yango Tech</title>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">YANGO <span>TECH</span></a>
+    <a href="index.html" class="nav-back">← Back to Overview</a>
+  </div>
+</nav>
+
+
+<section class="hero-sub">
+  <div class="inner">
+    <div class="tag">Energy & Utilities</div>
+    <h1>AI-Powered Smart Grid Intelligence</h1>
+    <p class="subtitle">Real-time grid monitoring, revenue protection, predictive asset management, and AI customer service — transforming national power utilities into data-driven operations.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="n">31%</div><div class="l">Reduction in unplanned outages</div></div>
+      <div class="stat"><div class="n">$12M+</div><div class="l">Revenue recovered quarterly</div></div>
+      <div class="stat"><div class="n">78%</div><div class="l">AI resolution rate</div></div>
+      <div class="stat"><div class="n">94%</div><div class="l">Load forecast accuracy</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Smart Grid Monitor -->
+<section style="background:var(--gray-bg)">
+  <div class="inner">
+    <div class="tag">Module 1</div>
+    <h2>Smart Grid AI Monitor</h2>
+    <p style="color:var(--gray);margin-bottom:2rem">Real-time AI-powered grid intelligence across the national power network</p>
+    <div class="dash-grid">
+      <div class="dash-card"><div class="change up">▲ 3.2%</div><div class="val">2,147 MW</div><div class="lbl">Current grid load (of 2,900 MW capacity)</div></div>
+      <div class="dash-card"><div class="change up">▲ 1.1%</div><div class="val">97.3%</div><div class="lbl">AI prediction accuracy (24hr forecast)</div></div>
+      <div class="dash-card"><div class="change down">▼ 2 resolved</div><div class="val">4</div><div class="lbl">Active anomalies in last hour</div></div>
+      <div class="dash-card"><div class="change up">▲ 18%</div><div class="val">$1.2M</div><div class="lbl">Demand response savings this quarter</div></div>
+    </div>
+
+    <h3 style="margin-top:2rem">AI Anomaly Alerts</h3>
+    <div class="alert-list" style="margin-top:1rem">
+      <div class="alert"><div class="dot"></div><div><h5>Sector 4 South — Unusual consumption spike</h5><p>Possible meter bypass detected — 94% confidence · 3 min ago</p></div></div>
+      <div class="alert warn"><div class="dot"></div><div><h5>Industrial Zone — Transformer temperature trending high</h5><p>T-4421 above threshold — 87% confidence · 12 min ago</p></div></div>
+      <div class="alert info"><div class="dot"></div><div><h5>Northern Grid — Load pattern shift</h5><p>Seasonal adjustment recommended — 91% confidence · 28 min ago</p></div></div>
+    </div>
+
+    <div style="margin-top:1.5rem;background:var(--dark);padding:1.5rem;border-radius:var(--radius)">
+      <p style="color:var(--red);font-weight:700;font-size:.85rem">AI RECOMMENDATION</p>
+      <p style="color:#aaa;font-size:.88rem;margin-top:.5rem">Based on weather forecast (39°C expected Thursday) and historical patterns, recommend pre-positioning 340 MW additional capacity. Estimated peak demand: 2,680 MW at 14:00–16:00. Confidence: 94%. Auto-dispatch ready on approval.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Revenue Protection -->
+<section>
+  <div class="inner">
+    <div class="tag">Module 2</div>
+    <h2>AI Revenue Protection & Loss Detection</h2>
+    <p style="color:var(--gray);margin-bottom:2rem">Machine learning-powered detection of technical and commercial losses across distribution zones</p>
+    <div class="dash-grid">
+      <div class="dash-card"><div class="change down">▼ 2.3%</div><div class="val">86.7%</div><div class="lbl">Collection efficiency (target: &lt;12% losses)</div></div>
+      <div class="dash-card"><div class="change up">▲ +12/week</div><div class="val">54</div><div class="lbl">AI theft detections confirmed</div></div>
+      <div class="dash-card"><div class="change up">▲ 34%</div><div class="val">$12.1M</div><div class="lbl">Revenue recovered vs prior quarter</div></div>
+      <div class="dash-card"><div class="change up">▲ 4.2%</div><div class="val">91.7%</div><div class="lbl">Detection accuracy (3.1% false positive)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Customer AI -->
+<section style="background:var(--gray-bg)">
+  <div class="inner">
+    <div class="tag">Module 3</div>
+    <h2>AI Customer Service Agent</h2>
+    <p style="color:var(--gray);margin-bottom:2rem">Multilingual AI handling billing, outages, meter queries, and energy advice — 24/7 via voice, chat, and USSD</p>
+    <div class="grid2">
+      <div>
+        <div class="dash-grid" style="grid-template-columns:1fr 1fr">
+          <div class="dash-card"><div class="change up">▲ 12%</div><div class="val">78%</div><div class="lbl">AI resolution rate — no human needed</div></div>
+          <div class="dash-card"><div class="change down">▼ 73%</div><div class="val">1.8 min</div><div class="lbl">Avg response (vs 6.7 min call center)</div></div>
+          <div class="dash-card"><div class="change up">▲ 890/day</div><div class="val">4,280</div><div class="lbl">Daily interactions (voice+chat+USSD)</div></div>
+          <div class="dash-card"><div class="change up">▲ 0.8</div><div class="val">4.6/5</div><div class="lbl">Customer satisfaction (vs 3.8 pre-AI)</div></div>
+        </div>
+      </div>
+      <div class="chat-demo">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div><span style="color:#888;font-size:.8rem">Online — Local languages + English</span></div>
+        <div class="chat-msg user">My power has been out since morning</div>
+        <div class="chat-msg bot">I can see there's a scheduled maintenance in your zone (Sector 7) until 2:00 PM today. Your account shows no billing issues. Would you like an SMS alert when power is restored?</div>
+        <div class="chat-msg user">Yes please. Also my last bill seems too high</div>
+        <div class="chat-msg bot subtle">Your January bill was $47.20 — 23% higher than your average. The main increase came from Dec 20-Jan 5 (holiday period). I can help you set up a payment plan or connect you with billing review. Which would you prefer?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Predictive Asset Management -->
+<section>
+  <div class="inner">
+    <div class="tag">Module 4</div>
+    <h2>Predictive Asset Management</h2>
+    <div class="dash-grid">
+      <div class="dash-card"><div class="change up">▲ 23/week</div><div class="val">47</div><div class="lbl">Predictive alerts active (before failure)</div></div>
+      <div class="dash-card"><div class="change up">▲ vs reactive</div><div class="val">14 days</div><div class="lbl">Avg failure lead time predicted</div></div>
+      <div class="dash-card"><div class="change up">▲ 42%</div><div class="val">$3.8M</div><div class="lbl">Maintenance savings vs schedule-based</div></div>
+      <div class="dash-card"><div class="change down">▼ YoY</div><div class="val">-31%</div><div class="lbl">Unplanned outage reduction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Architecture -->
+<section style="background:var(--black);color:white">
+  <div class="inner">
+    <div class="tag">Deployment</div>
+    <h2 style="color:white">Sovereign, On-Premise AI Platform</h2>
+    <p style="color:#888;margin-bottom:2rem">All data stays within national borders. AI models run locally with no cloud dependency.</p>
+    <div class="grid3">
+      <div style="padding:1.5rem;border-left:3px solid var(--red)"><h4 style="color:var(--red)">On-Premise</h4><p style="color:#aaa;font-size:.88rem">Data sovereign — hosted in your national data center</p></div>
+      <div style="padding:1.5rem;border-left:3px solid var(--red)"><h4 style="color:var(--red)">12+ AI Models</h4><p style="color:#aaa;font-size:.88rem">Grid, NLP, Vision, Forecasting — purpose-built</p></div>
+      <div style="padding:1.5rem;border-left:3px solid var(--red)"><h4 style="color:var(--red)">2.4 TB/day</h4><p style="color:#aaa;font-size:.88rem">Processing meter, SCADA, and GIS data</p></div>
+    </div>
+  </div>
+</section>
+
+
+<div class="cta-bar">
+  <h2>Ready to explore this for your country?</h2>
+  <p>We begin with a bilateral fit-gap analysis — no commitment, measurable outcomes within 8 weeks.</p>
+  <a class="cta-btn" href="mailto:eechernikov@yango-team.com">Schedule a Discussion →</a>
+</div>
+
+
+<footer>
+  <div style="font-weight:900;font-size:1.1rem;color:white;letter-spacing:.1em;margin-bottom:.4rem">YANGO <span style="color:var(--red)">TECH</span></div>
+  <p>Technology for national development · 35+ countries · Dubai, UAE</p>
+  <p style="margin-top:.8rem;font-size:.75rem;color:#555">Confidential — Prepared for the African Ambassadors Event, Moscow 2026</p>
+</footer>
+
+</body>
+</html>

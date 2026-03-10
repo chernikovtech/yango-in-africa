@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{--red:#FF1A1A;--black:#141414;--white:#FFF;--gray:#7A7A7A;--gray-bg:#F5F5F5;--dark:#1E1E1E;--radius:1rem;--max-w:1280px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--black);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(20,20,20,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--red)}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.7rem 2rem}
+.logo{font-weight:900;font-size:1.2rem;color:var(--white);letter-spacing:.12em;text-decoration:none}
+.logo span{color:var(--red)}
+.nav-back{color:#ccc;text-decoration:none;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.4rem}
+.nav-back:hover{color:var(--white)}
+section{padding:4rem 2rem}
+.inner{max-width:var(--max-w);margin:0 auto}
+.tag{color:var(--red);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
+.hero-sub{background:var(--black);min-height:50vh;display:flex;align-items:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-sub::before{content:'';position:absolute;top:-40%;right:-15%;width:70%;height:180%;background:radial-gradient(ellipse,rgba(255,26,26,.07)0%,transparent 70%);pointer-events:none}
+.hero-sub .inner{position:relative;z-index:1;width:100%}
+.hero-sub h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:var(--white);line-height:1.05;max-width:800px;margin-bottom:1rem}
+.hero-sub .subtitle{color:var(--gray);font-size:1.1rem;max-width:650px;margin-bottom:2rem}
+.stats-row{display:flex;gap:2.5rem;flex-wrap:wrap}
+.stat .n{font-size:2rem;font-weight:900;color:var(--red);line-height:1}
+.stat .l{color:var(--gray);font-size:.82rem;margin-top:.2rem}
+h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;line-height:1.1;margin-bottom:.8rem}
+h3{font-size:1.15rem;font-weight:800;margin-bottom:.5rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.card{background:var(--gray-bg);border-radius:var(--radius);padding:2rem;border-top:3px solid var(--red);transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.card h4{font-weight:800;margin-bottom:.4rem}
+.card p{color:var(--gray);font-size:.88rem}
+.dark-card{background:var(--dark);border-radius:var(--radius);padding:2rem;color:var(--white)}
+.dark-card h3{color:var(--red)}
+.dark-card p{color:#aaa;font-size:.9rem}
+.metric-row{display:flex;gap:.5rem;align-items:baseline;padding:1rem 0;border-bottom:1px solid #333}
+.metric-row:last-child{border:none}
+.metric-row .n{font-size:1.6rem;font-weight:900;color:var(--red);min-width:90px}
+.metric-row .d{color:#aaa;font-size:.88rem}
+.feat{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem}
+.feat-icon{width:44px;height:44px;min-width:44px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem}
+.feat h4{font-size:.95rem;font-weight:700;margin-bottom:.2rem}
+.feat p{color:var(--gray);font-size:.85rem}
+.accent-bar{width:100%;height:3px;background:var(--red);margin:3rem 0}
+.cta-bar{background:var(--red);color:white;text-align:center;padding:3.5rem 2rem;margin-top:3rem}
+.cta-bar h2{color:white;margin-bottom:.8rem}
+.cta-bar p{max-width:550px;margin:0 auto 1.5rem;opacity:.9;font-size:1rem}
+.cta-btn{display:inline-block;background:var(--black);color:var(--white);padding:.9rem 2.2rem;border-radius:var(--radius);text-decoration:none;font-weight:700;transition:transform .2s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:center;font-size:.82rem}
+/* Dashboard widgets */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.dash-card{background:var(--dark);border-radius:.8rem;padding:1.5rem;color:white}
+.dash-card .change{font-size:.75rem;padding:.15rem .5rem;border-radius:4px;display:inline-block;margin-bottom:.5rem}
+.dash-card .change.up{background:rgba(34,197,94,.15);color:#22c55e}
+.dash-card .change.down{background:rgba(239,68,68,.15);color:#ef4444}
+.dash-card .val{font-size:1.8rem;font-weight:900;margin-bottom:.2rem}
+.dash-card .lbl{color:#888;font-size:.8rem}
+.alert-list{display:flex;flex-direction:column;gap:.8rem}
+.alert{background:var(--dark);border-radius:.8rem;padding:1.2rem;display:flex;gap:1rem;align-items:flex-start;border-left:3px solid var(--red)}
+.alert.warn{border-left-color:#f59e0b}
+.alert.info{border-left-color:#3b82f6}
+.alert .dot{width:10px;height:10px;border-radius:50%;background:var(--red);margin-top:5px;min-width:10px}
+.alert.warn .dot{background:#f59e0b}
+.alert.info .dot{background:#3b82f6}
+.alert h5{color:white;font-size:.88rem;font-weight:700}
+.alert p{color:#888;font-size:.8rem;margin-top:.2rem}
+.bar-chart{display:flex;gap:.5rem;align-items:flex-end;height:120px;margin-top:1rem}
+.bar-chart .bar{flex:1;background:var(--red);border-radius:4px 4px 0 0;position:relative;transition:height .8s ease}
+.bar-chart .bar-label{text-align:center;font-size:.65rem;color:#888;margin-top:.3rem}
+.chat-demo{background:var(--dark);border-radius:var(--radius);padding:1.5rem;max-width:450px}
+.chat-msg{padding:.8rem 1rem;border-radius:.8rem;margin-bottom:.5rem;font-size:.85rem;max-width:85%}
+.chat-msg.user{background:#333;color:white;margin-left:auto}
+.chat-msg.bot{background:var(--red);color:white}
+.chat-msg.bot.subtle{background:#2a2a2a;color:#ccc}
+.process-steps{display:flex;gap:0;margin:2rem 0}
+.step{flex:1;text-align:center;padding:1.5rem 1rem;position:relative}
+.step::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--red);font-size:1.5rem;font-weight:900}
+.step:last-child::after{display:none}
+.step .num{font-size:2rem;font-weight:900;color:var(--red);margin-bottom:.3rem}
+.step h4{font-size:.85rem;font-weight:700}
+.step p{font-size:.75rem;color:var(--gray)}
+.arch-layer{padding:1rem 1.5rem;font-weight:600;color:white;font-size:.9rem}
+.arch-layer:first-child{border-radius:var(--radius) var(--radius) 0 0}
+.arch-layer:last-child{border-radius:0 0 var(--radius) var(--radius)}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}.stats-row{gap:1.5rem}.process-steps{flex-direction:column}.step::after{display:none}}
+@media(max-width:600px){.dash-grid{grid-template-columns:1fr}}
+</style>
+
+<title>AI Contact Centers — Yango Tech</title>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">YANGO <span>TECH</span></a>
+    <a href="index.html" class="nav-back">← Back to Overview</a>
+  </div>
+</nav>
+
+
+<section class="hero-sub">
+  <div class="inner">
+    <div class="tag">AI Contact Center</div>
+    <h1>Multilingual AI Voice Assistants for Africa</h1>
+    <p class="subtitle">80% auto-handling, 65% cost reduction, 3× better reachability — AI-powered inbound and outbound contact center solutions for telecoms, banks, and government agencies.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="n">80%</div><div class="l">Auto-handling rate</div></div>
+      <div class="stat"><div class="n">65%</div><div class="l">Cost reduction</div></div>
+      <div class="stat"><div class="n">3×</div><div class="l">Customer reachability</div></div>
+      <div class="stat"><div class="n">8 wks</div><div class="l">To measurable NPS lift</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--gray-bg)">
+  <div class="inner">
+    <div class="tag">Platform Overview</div>
+    <h2>AI Voice Platform — Live Dashboard</h2>
+    <div class="dash-grid">
+      <div class="dash-card"><div class="change up">▲ 12%</div><div class="val">78%</div><div class="lbl">AI resolution — no human needed</div></div>
+      <div class="dash-card"><div class="change down">▼ 73%</div><div class="val">1.8 min</div><div class="lbl">Avg resolution time</div></div>
+      <div class="dash-card"><div class="change up">▲ 890</div><div class="val">4,280</div><div class="lbl">Daily interactions</div></div>
+      <div class="dash-card"><div class="change up">▲ 0.8</div><div class="val">4.6/5</div><div class="lbl">Customer satisfaction</div></div>
+    </div>
+
+    <div class="grid2" style="margin-top:2rem">
+      <div>
+        <h3>Inbound AI Agent</h3>
+        <div class="chat-demo" style="margin-top:1rem;max-width:100%">
+          <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div><span style="color:#888;font-size:.8rem">AI Agent Online — Local languages + English + French</span></div>
+          <div class="chat-msg user">I want to know my balance and buy a data bundle</div>
+          <div class="chat-msg bot">Your current balance is $4.50. I can help with data bundles! Your most popular choice is the 1GB weekly at $2. Would you like to purchase that, or see other options?</div>
+          <div class="chat-msg user">Show me other options</div>
+          <div class="chat-msg bot subtle">Here are your options: 1) 500MB daily — $0.50 2) 1GB weekly — $2.00 3) 3GB monthly — $5.00 4) 10GB monthly — $12.00. Which would you like?</div>
+          <div class="chat-msg user">The 3GB monthly please</div>
+          <div class="chat-msg bot">Done! 3GB monthly bundle activated for $5.00. Balance remaining: -$0.50 (will be deducted from your next recharge). Bundle valid until April 10. Anything else?</div>
+        </div>
+
+        <h3 style="margin-top:2rem">Outbound AI Campaigns</h3>
+        <div style="background:var(--dark);border-radius:var(--radius);padding:1.5rem;margin-top:1rem">
+          <div style="display:flex;justify-content:space-between;color:#888;font-size:.75rem;margin-bottom:.8rem"><span>Campaign</span><span>Contacted</span><span>Converted</span><span>Revenue</span></div>
+          <div style="display:flex;justify-content:space-between;color:white;font-size:.85rem;padding:.5rem 0;border-bottom:1px solid #333"><span>Data bundle upsell</span><span>12,400</span><span>4,960 (40%)</span><span style="color:#22c55e">$24.8K</span></div>
+          <div style="display:flex;justify-content:space-between;color:white;font-size:.85rem;padding:.5rem 0;border-bottom:1px solid #333"><span>Churn prevention</span><span>3,200</span><span>1,280 (40%)</span><span style="color:#22c55e">$38.4K</span></div>
+          <div style="display:flex;justify-content:space-between;color:white;font-size:.85rem;padding:.5rem 0"><span>Bill collection</span><span>8,700</span><span>5,220 (60%)</span><span style="color:#22c55e">$104K</span></div>
+        </div>
+      </div>
+      <div class="dark-card">
+        <h3>Customer Value Management</h3>
+        <div style="margin-top:1rem">
+          <div class="feat"><div class="feat-icon">📈</div><div><h4 style="color:white">Upsell / Cross-sell</h4><p style="color:#aaa">AI identifies the right offer for each customer — data bundles, VAS, mobile money, insurance — based on usage patterns and propensity models.</p></div></div>
+          <div class="feat"><div class="feat-icon">🔄</div><div><h4 style="color:white">Churn Prediction</h4><p style="color:#aaa">ML models flag at-risk subscribers 30 days before likely churn. Automated retention offers via the channel they respond to most.</p></div></div>
+          <div class="feat"><div class="feat-icon">🎯</div><div><h4 style="color:white">Campaign Micro-Targeting</h4><p style="color:#aaa">Segment-of-one targeting with ML scoring. Right message, right channel, right time. 40% higher conversion vs broadcast campaigns.</p></div></div>
+          <div class="feat"><div class="feat-icon">✅</div><div><h4 style="color:white">Quality & Compliance</h4><p style="color:#aaa">Every conversation evaluated automatically. Sentiment analysis, compliance checking, agent scoring. Real-time alerts for escalation.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="cta-bar">
+  <h2>Ready to explore this for your country?</h2>
+  <p>We begin with a bilateral fit-gap analysis — no commitment, measurable outcomes within 8 weeks.</p>
+  <a class="cta-btn" href="mailto:eechernikov@yango-team.com">Schedule a Discussion →</a>
+</div>
+
+
+<footer>
+  <div style="font-weight:900;font-size:1.1rem;color:white;letter-spacing:.1em;margin-bottom:.4rem">YANGO <span style="color:var(--red)">TECH</span></div>
+  <p>Technology for national development · 35+ countries · Dubai, UAE</p>
+  <p style="margin-top:.8rem;font-size:.75rem;color:#555">Confidential — Prepared for the African Ambassadors Event, Moscow 2026</p>
+</footer>
+
+</body>
+</html>
