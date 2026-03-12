@@ -44,7 +44,7 @@ For sites with dropdown menus (like Industries / Products on tech.yango.com):
     <div class="yt-nav__dropdown-inner">
       <a href="/retail" class="yt-nav__dropdown-item">
         <span class="yt-label">Retail & E-Commerce</span>
-        <p class="yt-label yt-text-secondary">Digital commerce solutions</p>
+        <p class="yt-body yt-text-secondary">Digital commerce solutions</p>
       </a>
       <!-- more items -->
     </div>
@@ -133,8 +133,8 @@ Full-viewport height, dark background, white text.
 
 ### Rules
 - Headline max-width: `50rem` (prevents ultra-wide unreadable lines)
-- Subtitle: `opacity: 0.7` for softer secondary text
-- CTA button: always `.yt-btn--primary` (red)
+- Subtitle: sentence case, `opacity: 0.6`, `letter-spacing: 0.05em` for softer secondary text
+- CTA button: always `.yt-btn--primary` (red), text uppercase
 - Include `padding-top: 6rem` to clear the fixed nav
 
 ---
@@ -154,7 +154,7 @@ Full-viewport height, dark background, white text.
   </div>
   <div class="yt-card__body">
     <h3 class="yt-h3">Retail & E-Commerce</h3>
-    <p class="yt-label yt-text-secondary" style="margin-top:1rem;">
+    <p class="yt-body yt-text-secondary" style="margin-top:1rem;">
       End-to-end digital commerce infrastructure
     </p>
   </div>
@@ -240,7 +240,7 @@ Full-viewport height, dark background, white text.
 
 ### Rules
 - All buttons: `border-radius: var(--radius-btn)` (2rem) — always pill-shaped
-- Text: `uppercase`, `letter-spacing: 0.2em`, `font-weight: 500`
+- Text: `uppercase`, `letter-spacing: 0.15em`, `font-weight: 500`
 - Transitions: `var(--transition-fast)` (0.2s ease-in-out)
 - Never use icons inside primary CTAs on tech.yango.com — text only
 
@@ -253,19 +253,19 @@ Full-viewport height, dark background, white text.
 ```html
 <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 48rem;">
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-    <input class="yt-input" type="text" placeholder="NAME">
-    <input class="yt-input" type="email" placeholder="EMAIL">
+    <input class="yt-input" type="text" placeholder="Name">
+    <input class="yt-input" type="email" placeholder="Email">
   </div>
-  <input class="yt-input" type="text" placeholder="COMPANY">
+  <input class="yt-input" type="text" placeholder="Company">
   <select class="yt-input">
-    <option value="" disabled selected>INDUSTRY</option>
-    <option>RETAIL & E-COMMERCE</option>
-    <option>FINANCIAL SERVICES</option>
-    <option>GOVERNMENT</option>
-    <option>LOGISTICS</option>
-    <option>TELECOM</option>
+    <option value="" disabled selected>Industry</option>
+    <option>Retail & E-Commerce</option>
+    <option>Financial Services</option>
+    <option>Government</option>
+    <option>Logistics</option>
+    <option>Telecom</option>
   </select>
-  <textarea class="yt-input" placeholder="MESSAGE"></textarea>
+  <textarea class="yt-input" placeholder="Message"></textarea>
   <button class="yt-btn yt-btn--primary">SUBMIT</button>
 </div>
 ```
@@ -274,9 +274,9 @@ Full-viewport height, dark background, white text.
 - Input bg: `var(--input-bg)` — `rgb(226,226,226)`
 - Radius: `var(--radius-input)` — `1.25rem`
 - Padding: `2rem 1.5rem`
-- Placeholder text: uppercase, `var(--text-secondary)` color
+- Placeholder text: sentence case, `letter-spacing: 0.04em`, `var(--text-secondary)` color
 - Focus: red outline `2px solid var(--primary-color)`
-- Submit button: `.yt-btn--primary`, hover goes dark
+- Submit button: `.yt-btn--primary` (uppercase), hover goes dark
 
 ---
 
@@ -295,8 +295,8 @@ Full-viewport height, dark background, white text.
         <div>
           <p class="yt-label" style="margin-bottom:1rem; opacity:0.5;">COLUMN TITLE</p>
           <ul style="list-style:none; display:flex; flex-direction:column; gap:0.75rem;">
-            <li><a href="#" class="yt-label">Link 1</a></li>
-            <li><a href="#" class="yt-label">Link 2</a></li>
+            <li><a href="#" class="yt-label--sentence">Link 1</a></li>
+            <li><a href="#" class="yt-label--sentence">Link 2</a></li>
           </ul>
         </div>
         <!-- More columns as needed -->
@@ -315,6 +315,8 @@ Full-viewport height, dark background, white text.
 ### Rules
 - Background: `#141414` (near-black)
 - Logo: inverted (white) with `filter: invert(1)`
+- Column titles: `.yt-label` (uppercase, `0.12em`)
+- Column link items: `.yt-label--sentence` (sentence case, `0.05em`)
 - Link hover: `opacity: 0.5` (no color change)
 - Social icons: `background: rgb(31,31,31)`, `border-radius: 1rem`, `padding: 0.75rem`
 - Bottom bar: separated by `border-top: 1px solid rgba(255,255,255,0.1)`
@@ -455,14 +457,17 @@ For dashboards and data-heavy demos:
   padding: 1rem 1.5rem;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: var(--letter-spacing-body);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .yt-table th {
   color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-ui);
+  font-size: 0.72rem;
 }
 ```
 
@@ -480,8 +485,9 @@ For dashboards and data-heavy demos:
 | `.yt-dark`           | Dark background section              |
 | `.yt-light`          | Light (#F5F5F5) background section   |
 | `.yt-h1` / `h2` / `h3` | Yango Headline typography         |
-| `.yt-body`           | Body text with uppercase + spacing   |
-| `.yt-label`          | Small label text (0.75rem, 500)      |
+| `.yt-body`           | Sentence-case body text (0.05em)     |
+| `.yt-label`          | Uppercase UI chrome (0.72rem, 0.12em)|
+| `.yt-label--sentence`| Sentence-case label (footer links)   |
 | `.yt-text-secondary` | Muted grey text color                |
 | `.yt-btn--primary`   | Red CTA button                       |
 | `.yt-btn--dark`      | Dark CTA button (nav style)          |

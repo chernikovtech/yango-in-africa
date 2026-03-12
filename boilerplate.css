@@ -156,8 +156,10 @@
   /* Typography */
   --font-headline: "Yango Headline", Helvetica, Arial, sans-serif;
   --font-body: "Yango Group Text", "YS Text", Helvetica, Arial, sans-serif;
-  --letter-spacing-body: 0.2em;
+  --letter-spacing-body: 0.05em;
+  --letter-spacing-ui: 0.12em;
   --letter-spacing-headline: calc(1em / 50);
+  --letter-spacing-cta: 0.15em;
 
   /* Radii */
   --radius-card: 1.875rem;
@@ -208,11 +210,11 @@ html {
 body {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.4;
+  font-size: 0.875rem;
+  line-height: 1.5;
   color: var(--text-primary);
   background-color: var(--body-color);
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: var(--letter-spacing-body);
   font-variant-numeric: proportional-nums;
 }
@@ -332,19 +334,26 @@ img {
 .yt-body {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.4;
+  font-size: 0.875rem;
+  line-height: 1.5;
   letter-spacing: var(--letter-spacing-body);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .yt-label {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   line-height: 1.2;
-  letter-spacing: var(--letter-spacing-body);
+  letter-spacing: var(--letter-spacing-ui);
   text-transform: uppercase;
+}
+
+/* Sentence-case label variant (for footer link lists, longer labels) */
+.yt-label--sentence {
+  text-transform: none;
+  letter-spacing: var(--letter-spacing-body);
+  font-size: 0.78rem;
 }
 
 .yt-text-secondary {
@@ -388,7 +397,7 @@ img {
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 0.875rem;
-  letter-spacing: var(--letter-spacing-body);
+  letter-spacing: var(--letter-spacing-cta);
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
@@ -462,9 +471,9 @@ img {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: var(--radius-pill);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: var(--letter-spacing-body);
+  letter-spacing: var(--letter-spacing-ui);
   text-transform: uppercase;
 }
 
@@ -489,10 +498,10 @@ img {
   border: none;
   border-radius: var(--radius-input);
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 400;
-  letter-spacing: var(--letter-spacing-body);
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: var(--text-primary);
   outline: none;
   transition: var(--transition-fast);
@@ -500,8 +509,8 @@ img {
 
 .yt-input::placeholder {
   color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-body);
+  text-transform: none;
+  letter-spacing: 0.04em;
 }
 
 .yt-input:focus {
@@ -566,9 +575,9 @@ textarea.yt-input {
 
 .yt-nav__link {
   padding: 1.1rem 1rem;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: var(--letter-spacing-body);
+  letter-spacing: var(--letter-spacing-ui);
   text-transform: uppercase;
   text-decoration: none;
   color: var(--text-on-dark);
@@ -663,9 +672,9 @@ textarea.yt-input {
   background: var(--surface-mid);
   color: var(--text-on-dark);
   border-radius: var(--radius-tooltip);
-  font-size: 1rem;
+  font-size: 0.875rem;
   line-height: 1.2;
-  letter-spacing: var(--letter-spacing-body);
+  letter-spacing: var(--letter-spacing-ui);
   text-transform: uppercase;
 }
 
