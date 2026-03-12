@@ -4,75 +4,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yango Tech — Technology for Africa's National Development</title>
+<link rel="preload" as="font" href="https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline.woff2" crossorigin="anonymous">
+<link rel="preload" as="font" href="https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Regular.woff2" crossorigin="anonymous">
+<link rel="preload" as="font" href="https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Medium.woff2" crossorigin="anonymous">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+  /* === FONT-FACE DECLARATIONS === */
+  @font-face { font-family:"Yango Headline"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline.woff") format("woff"); font-weight:900; font-style:normal; font-display:swap; }
+  @font-face { font-family:"Yango Headline"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline-Italic.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline-Italic.woff") format("woff"); font-weight:900; font-style:italic; font-display:swap; }
+  @font-face { font-family:"Yango Group Text"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Regular.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:"Yango Group Text"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Medium.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Medium.woff") format("woff"); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face { font-family:"Yango Group Text"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Bold.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Bold.woff") format("woff"); font-weight:600; font-style:normal; font-display:swap; }
+  @font-face { font-family:"Yango Group Text"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Black.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Black.woff2") format("woff"); font-weight:900; font-style:normal; font-display:swap; }
+  @font-face { font-family:"YS Text"; src:url("https://yastatic.net/s3/home/fonts/ys/4/text-regular.woff2") format("woff2"), url("https://yastatic.net/s3/home/fonts/ys/4/text-regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:"YS Text"; src:url("https://yastatic.net/s3/home/fonts/ys/4/text-medium.woff2") format("woff2"), url("https://yastatic.net/s3/home/fonts/ys/4/text-medium.woff") format("woff"); font-weight:500; font-style:normal; font-display:swap; }
 
+  /* === DESIGN TOKENS === */
   :root {
-    --red: #FF1A1A;
-    --black: #141414;
-    --white: #FFFFFF;
-    --gray-text: #7A7A7A;
-    --gray-bg: #F5F5F5;
-    --gray-border: #E5E5E5;
-    --dark-card: #1E1E1E;
-    --font-headline: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --font-body: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --radius: 1rem;
-    --max-w: 1280px;
+    --primary-color: #FF1A1A;
+    --body-color: #F5F5F5;
+    --text-primary: #141414;
+    --text-secondary: #7A7A7A;
+    --text-on-dark: #F5F5F5;
+    --surface-dark: #232323;
+    --surface-mid: #323232;
+    --border-color: rgba(196, 196, 196, 1);
+    --font-headline: "Yango Headline", Helvetica, Arial, sans-serif;
+    --font-body: "Yango Group Text", "YS Text", Helvetica, Arial, sans-serif;
+    --letter-spacing-body: 0.2em;
+    --letter-spacing-headline: calc(1em / 50);
+    --radius-card: 1.875rem;
+    --radius-btn: 2rem;
+    --radius-pill: 2rem;
+    --transition-fast: 0.2s ease-in-out;
+    --transition-image: 1.2s ease-in-out;
+    --max-w: 116rem;
+    --yt-padding: 1.87rem;
   }
+  @media (max-width: 1439px) { :root { --yt-padding: 1.25rem; } }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
+  /* === RESET & BASE === */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   body {
     font-family: var(--font-body);
-    color: var(--black);
-    background: var(--white);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    background-color: var(--body-color);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-body);
+    font-variant-numeric: proportional-nums;
   }
+  ::selection { background: var(--primary-color); color: white; }
+  a { color: inherit; text-decoration: none; transition: var(--transition-fast); }
+  img { max-width: 100%; height: auto; display: block; }
 
-  /* NAV */
+  /* === NAVIGATION === */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(20,20,20,0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 2px solid var(--red);
+    padding: 1.25rem var(--yt-padding);
+  }
+  nav::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+    pointer-events: none; z-index: -1;
   }
   .nav-inner {
     max-width: var(--max-w); margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0.8rem 2rem;
   }
-  .logo { font-weight: 900; font-size: 1.3rem; color: var(--white); letter-spacing: 0.15em; }
-  .logo span { color: var(--red); }
-  .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .logo img { height: 30px; width: auto; filter: invert(1); }
+  .nav-links {
+    display: flex; align-items: center; gap: 0.5rem; list-style: none;
+  }
   .nav-links a {
-    color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 500;
-    transition: color 0.2s;
+    padding: 1.1rem 1rem;
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: var(--letter-spacing-body);
+    text-transform: uppercase;
+    color: var(--text-on-dark);
+    text-decoration: none;
+    transition: var(--transition-fast);
   }
-  .nav-links a:hover { color: var(--white); }
+  .nav-links:hover a:not(:hover) { opacity: 0.4; }
+  .nav-links a:hover { color: var(--primary-color); }
+  .nav-cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background: var(--surface-dark); color: var(--text-on-dark);
+    border: none; border-radius: var(--radius-btn);
+    font-family: var(--font-body); font-weight: 500; font-size: 0.75rem;
+    letter-spacing: var(--letter-spacing-body); text-transform: uppercase;
+    text-decoration: none; cursor: pointer; transition: var(--transition-fast);
+  }
+  .nav-cta:hover { background: var(--primary-color); color: white; }
   .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-  .hamburger span { display: block; width: 22px; height: 2px; background: #ccc; margin: 5px 0; transition: all 0.3s; }
-  .mobile-menu { display: none; position: fixed; top: 52px; left: 0; right: 0; background: rgba(20,20,20,0.98); padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; border-bottom: 2px solid var(--red); z-index: 99; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-on-dark); margin: 5px 0; transition: all 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: 70px; left: 0; right: 0;
+    background: rgba(20,20,20,0.98); backdrop-filter: blur(12px);
+    padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; z-index: 99;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a { color: #ccc; text-decoration: none; font-size: 0.95rem; font-weight: 500; padding: 0.3rem 0; }
-  .mobile-menu a:hover { color: var(--white); }
+  .mobile-menu a {
+    color: var(--text-on-dark); text-decoration: none;
+    font-size: 0.75rem; font-weight: 500; padding: 0.5rem 0;
+    letter-spacing: var(--letter-spacing-body); text-transform: uppercase;
+  }
+  .mobile-menu a:hover { color: var(--primary-color); }
 
-  /* HERO */
+  /* === HERO === */
   .hero {
-    background: var(--black);
+    background: #000;
     min-height: 100vh;
     display: flex; align-items: center;
-    padding: 6rem 2rem 4rem;
+    padding: 6rem var(--yt-padding) 4rem;
     position: relative;
     overflow: hidden;
+    color: var(--text-on-dark);
   }
   .hero::before {
     content: '';
-    position: absolute; top: -50%; right: -20%; width: 80%; height: 200%;
-    background: radial-gradient(ellipse, rgba(255,26,26,0.08) 0%, transparent 70%);
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 25% 50%, rgba(255,26,26,0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 30%, rgba(255,26,26,0.1) 0%, transparent 50%);
     pointer-events: none;
   }
   .hero-inner {
@@ -80,27 +138,30 @@
     width: 100%;
   }
   .hero-tag {
-    color: var(--red); font-size: 0.9rem; font-weight: 700;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 1.5rem;
+    font-family: var(--font-body);
+    color: var(--primary-color); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: var(--letter-spacing-body); text-transform: uppercase;
+    margin-bottom: 2rem;
     display: inline-block;
     animation: fadeUp 0.8s ease-out;
   }
   .hero h1 {
     font-family: var(--font-headline);
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(3rem, 5vw, 6.25rem);
     font-weight: 900;
-    color: var(--white);
-    line-height: 1.05;
-    max-width: 900px;
-    margin-bottom: 1.5rem;
+    color: var(--text-on-dark);
+    line-height: 85%;
+    letter-spacing: var(--letter-spacing-headline);
+    max-width: 50rem;
+    margin-bottom: 2rem;
+    text-transform: none;
     animation: fadeUp 0.8s ease-out 0.1s both;
   }
   .hero p {
-    color: var(--gray-text);
-    font-size: 1.15rem;
-    max-width: 700px;
-    margin-bottom: 2.5rem;
+    color: rgba(245,245,245,0.7);
+    font-size: 1rem;
+    max-width: 36rem;
+    margin-bottom: 3rem;
     animation: fadeUp 0.8s ease-out 0.2s both;
   }
   .hero-stats {
@@ -108,79 +169,84 @@
     animation: fadeUp 0.8s ease-out 0.3s both;
   }
   .hero-stat .num {
-    font-size: 2.5rem; font-weight: 900; color: var(--red);
-    line-height: 1;
+    font-family: var(--font-headline);
+    font-size: clamp(2rem, 3vw, 3rem); font-weight: 900; color: var(--primary-color);
+    line-height: 90%; letter-spacing: var(--letter-spacing-headline);
+    text-transform: none;
   }
-  .hero-stat .label { color: var(--gray-text); font-size: 0.85rem; margin-top: 0.3rem; }
+  .hero-stat .label {
+    color: rgba(245,245,245,0.5); font-size: 0.75rem; font-weight: 500;
+    margin-top: 0.5rem;
+  }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* SECTIONS */
-  section { padding: 5rem 2rem; }
+  /* === SECTIONS === */
+  section { padding: 6rem var(--yt-padding); }
   .section-inner { max-width: var(--max-w); margin: 0 auto; }
   .section-tag {
-    color: var(--red); font-size: 0.8rem; font-weight: 700;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 0.8rem;
+    color: var(--primary-color); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: var(--letter-spacing-body); text-transform: uppercase;
+    margin-bottom: 1rem;
   }
   .section-title {
     font-family: var(--font-headline);
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-size: clamp(2rem, 3.5vw, 3.85rem);
     font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 1rem;
+    line-height: 90%;
+    letter-spacing: var(--letter-spacing-headline);
+    margin-bottom: 1.5rem;
+    text-transform: none;
   }
   .section-subtitle {
-    color: var(--gray-text);
-    font-size: 1.05rem;
-    max-width: 700px;
-    margin-bottom: 3rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    max-width: 36rem;
+    margin-bottom: 4rem;
   }
 
-  /* DARK SECTIONS */
-  .dark-section { background: var(--black); color: var(--white); }
-  .dark-section .section-subtitle { color: #999; }
+  /* === DARK SECTIONS === */
+  .dark-section { background: #000; color: var(--text-on-dark); }
+  .dark-section .section-subtitle { color: rgba(245,245,245,0.5); }
 
-  /* PILLARS GRID */
+  /* === PILLARS GRID === */
   .pillars-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 1.5rem;
   }
   .pillar-card {
-    background: var(--gray-bg);
-    border-radius: var(--radius);
-    padding: 2rem;
-    border-top: 3px solid var(--red);
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: white;
+    border-radius: var(--radius-card);
+    padding: 2.5rem;
+    transition: var(--transition-fast);
     cursor: default;
   }
-  .pillar-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-  }
+  .pillar-card:hover { opacity: 0.85; }
   .pillar-icon {
     width: 48px; height: 48px;
-    background: var(--black);
-    border-radius: 12px;
+    background: var(--text-primary);
+    border-radius: 1rem;
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1rem;
-    font-size: 1.3rem; color: var(--white);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem; color: white;
   }
   .pillar-card h3 {
-    font-size: 1.2rem; font-weight: 800;
-    margin-bottom: 0.5rem;
+    font-family: var(--font-headline);
+    font-size: 1.5rem; font-weight: 900;
+    line-height: 90%; letter-spacing: var(--letter-spacing-headline);
+    margin-bottom: 0.75rem;
+    text-transform: none;
   }
-  .pillar-card p { color: var(--gray-text); font-size: 0.9rem; }
+  .pillar-card p { color: var(--text-secondary); font-size: 0.875rem; }
 
-  /* SOLUTION DEEP DIVE */
-  .solution-section { padding: 5rem 2rem; }
-  .solution-section:nth-child(even) { background: var(--gray-bg); }
+  /* === SOLUTION DEEP DIVE === */
+  .solution-section { padding: 6rem var(--yt-padding); }
 
-  .solution-header { margin-bottom: 3rem; }
+  .solution-header { margin-bottom: 4rem; }
   .solution-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -193,124 +259,159 @@
     display: flex; gap: 1rem; align-items: flex-start;
   }
   .feature-icon {
-    width: 40px; height: 40px; min-width: 40px;
-    background: var(--red);
-    border-radius: 10px;
+    width: 44px; height: 44px; min-width: 44px;
+    background: var(--primary-color);
+    border-radius: var(--radius-card);
     display: flex; align-items: center; justify-content: center;
     color: white; font-size: 1.1rem;
   }
-  .feature-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
-  .feature-item p { color: var(--gray-text); font-size: 0.88rem; }
+  .feature-item h4 {
+    font-family: var(--font-headline);
+    font-size: 1.1rem; font-weight: 900;
+    line-height: 90%; letter-spacing: var(--letter-spacing-headline);
+    margin-bottom: 0.4rem;
+    text-transform: none;
+  }
+  .feature-item p { color: var(--text-secondary); font-size: 0.875rem; }
 
   .impact-box {
-    background: var(--black);
-    border-radius: var(--radius);
+    background: var(--text-primary);
+    border-radius: var(--radius-card);
     padding: 2.5rem;
-    color: var(--white);
+    color: var(--text-on-dark);
   }
-  .impact-box h3 { color: var(--red); font-size: 1.2rem; font-weight: 800; margin-bottom: 1.5rem; }
+  .impact-box h3 {
+    color: var(--primary-color); font-family: var(--font-headline);
+    font-size: 1.2rem; font-weight: 900; margin-bottom: 1.5rem;
+    letter-spacing: var(--letter-spacing-headline); text-transform: none;
+  }
   .impact-stat {
     display: flex; align-items: baseline; gap: 1rem;
     margin-bottom: 1.2rem;
     padding-bottom: 1.2rem;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
   .impact-stat:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
   .impact-stat .num {
-    font-size: 1.8rem; font-weight: 900; color: var(--red);
+    font-family: var(--font-headline);
+    font-size: 1.8rem; font-weight: 900; color: var(--primary-color);
     min-width: 100px;
+    letter-spacing: var(--letter-spacing-headline);
+    text-transform: none;
   }
-  .impact-stat .desc { color: #aaa; font-size: 0.9rem; }
+  .impact-stat .desc { color: rgba(245,245,245,0.5); font-size: 0.875rem; }
 
-  /* PPP SECTION */
+  /* === PPP SECTION === */
   .ppp-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.5rem;
   }
   .ppp-card {
-    background: var(--dark-card);
-    border-radius: var(--radius);
-    padding: 2rem;
-    border-left: 3px solid var(--red);
+    background: var(--surface-dark);
+    border-radius: var(--radius-card);
+    padding: 2.5rem;
   }
-  .ppp-card h3 { color: var(--red); font-size: 1.1rem; font-weight: 800; margin-bottom: 0.6rem; }
-  .ppp-card p { color: #aaa; font-size: 0.9rem; }
+  .ppp-card h3 {
+    color: var(--primary-color); font-family: var(--font-headline);
+    font-size: 1.1rem; font-weight: 900; margin-bottom: 0.75rem;
+    letter-spacing: var(--letter-spacing-headline); text-transform: none;
+  }
+  .ppp-card p { color: rgba(245,245,245,0.5); font-size: 0.875rem; }
 
-  /* ENGAGEMENT MODEL */
+  /* === ENGAGEMENT MODEL === */
   .steps-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
   }
   .step-card {
-    background: var(--gray-bg);
-    border-radius: var(--radius);
-    padding: 2rem;
+    background: white;
+    border-radius: var(--radius-card);
+    padding: 2.5rem;
     text-align: center;
-    border-top: 3px solid var(--red);
     position: relative;
   }
   .step-num {
-    font-size: 2.5rem; font-weight: 900; color: var(--red);
-    margin-bottom: 0.5rem; line-height: 1;
+    font-family: var(--font-headline);
+    font-size: 3rem; font-weight: 900; color: var(--primary-color);
+    margin-bottom: 0.75rem; line-height: 90%;
+    letter-spacing: var(--letter-spacing-headline);
+    text-transform: none;
   }
-  .step-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
-  .step-card p { color: var(--gray-text); font-size: 0.85rem; }
+  .step-card h3 {
+    font-family: var(--font-headline);
+    font-size: 1rem; font-weight: 900; margin-bottom: 0.5rem;
+    letter-spacing: var(--letter-spacing-headline);
+    text-transform: none;
+  }
+  .step-card p { color: var(--text-secondary); font-size: 0.8rem; }
 
-  /* CTA */
+  /* === CTA === */
   .cta-section {
-    background: var(--red);
-    color: var(--white);
+    background: var(--primary-color);
+    color: white;
     text-align: center;
-    padding: 5rem 2rem;
+    padding: 6rem var(--yt-padding);
   }
   .cta-section h2 {
     font-family: var(--font-headline);
-    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-size: clamp(2rem, 4vw, 3.85rem);
     font-weight: 900;
-    margin-bottom: 1rem;
+    line-height: 90%;
+    letter-spacing: var(--letter-spacing-headline);
+    margin-bottom: 1.5rem;
+    text-transform: none;
   }
-  .cta-section p { font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; opacity: 0.9; }
+  .cta-section p { font-size: 1rem; max-width: 36rem; margin: 0 auto 2.5rem; opacity: 0.9; }
   .cta-btn {
-    display: inline-block;
-    background: var(--black);
-    color: var(--white);
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--text-primary);
+    color: white;
     padding: 1rem 2.5rem;
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: var(--letter-spacing-body);
+    text-transform: uppercase;
+    transition: var(--transition-fast);
   }
-  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+  .cta-btn:hover { background: #000; color: white; }
 
-  /* FOOTER */
+  /* === FOOTER === */
   footer {
-    background: var(--black);
-    color: var(--gray-text);
-    padding: 3rem 2rem;
+    background: var(--text-primary);
+    color: var(--text-on-dark);
+    padding: 4rem var(--yt-padding) 2rem;
     text-align: center;
-    font-size: 0.85rem;
   }
-  footer .logo { margin-bottom: 0.5rem; display: block; }
+  footer .logo img { height: 30px; width: auto; filter: invert(1); margin: 0 auto; }
+  footer p { font-size: 0.75rem; font-weight: 500; color: rgba(245,245,245,0.5); }
+  .footer-bottom {
+    margin-top: 3rem; padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
 
-  /* EXPANDABLE SECTIONS */
+  /* === EXPANDABLE SECTIONS === */
   .expand-trigger {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--red);
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-top: 0.8rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 0.75rem;
+    margin-top: 1rem;
     border: none;
     background: none;
-    font-family: inherit;
+    font-family: var(--font-body);
+    letter-spacing: var(--letter-spacing-body);
+    text-transform: uppercase;
   }
-  .expand-trigger:hover { text-decoration: underline; }
+  .expand-trigger:hover { opacity: 0.7; }
   .expand-content {
     max-height: 0;
     overflow: hidden;
@@ -322,7 +423,7 @@
     opacity: 1;
   }
 
-  /* RESPONSIVE */
+  /* === RESPONSIVE === */
   @media (max-width: 900px) {
     .solution-grid { grid-template-columns: 1fr; }
     .steps-row { grid-template-columns: repeat(2, 1fr); }
@@ -340,9 +441,11 @@
 <body>
 
 <!-- NAV -->
-<nav>
+<nav id="nav">
   <div class="nav-inner">
-    <div class="logo">YANGO <span>TECH</span></div>
+    <a href="index.html" class="logo">
+      <img src="https://avatars.mds.yandex.net/get-lpc/14837328/21641dca-3288-4eeb-8d99-81f8cb31a763/orig" alt="Yango Tech" width="176" height="30">
+    </a>
     <div class="nav-links">
       <a href="#solutions">Solutions</a>
       <a href="medtech.html">MedTech</a>
@@ -352,8 +455,7 @@
       <a href="gov-services.html">Government</a>
       <a href="energy.html">Energy</a>
       <a href="cloud.html">Cloud &amp; AI</a>
-      <a href="#how">How We Work</a>
-      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">Contact Us</a>
     </div>
     <button class="hamburger" onclick="document.getElementById('mob-menu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -369,8 +471,7 @@
   <a href="gov-services.html">Government</a>
   <a href="energy.html">Energy</a>
   <a href="cloud.html">Cloud &amp; AI</a>
-  <a href="#how">How We Work</a>
-  <a href="#contact">Contact</a>
+  <a href="#contact">Contact Us</a>
 </div>
 
 <!-- HERO -->
@@ -390,26 +491,26 @@
 </section>
 
 <!-- AFRICA PRESENCE -->
-<section style="background:var(--gray-bg); padding: 4rem 2rem;">
+<section style="background:var(--body-color); padding: 4rem 2rem;">
   <div class="section-inner">
     <div class="section-tag">Our African Footprint</div>
     <h2 class="section-title">Already on the ground across the continent</h2>
     <p class="section-subtitle">From ride-hailing services in 16+ countries to government-level partnerships, banking integrations, and healthcare pilots — Yango Tech is building Africa's digital backbone.</p>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-      <div style="background:var(--black); padding:2rem; border-radius:var(--radius);">
-        <div style="color:var(--red); font-size:2rem; font-weight:900;">10+</div>
+      <div style="background:var(--text-primary); padding:2.5rem; border-radius:var(--radius-card);">
+        <div style="font-family:var(--font-headline); color:var(--primary-color); font-size:2.5rem; font-weight:900; letter-spacing:var(--letter-spacing-headline); text-transform:none;">10+</div>
         <div style="color:#aaa; font-size:0.9rem;">Markets with active B2B partnerships in banking, telecom, government, and enterprise</div>
       </div>
-      <div style="background:var(--black); padding:2rem; border-radius:var(--radius);">
-        <div style="color:var(--red); font-size:2rem; font-weight:900;">5+</div>
+      <div style="background:var(--text-primary); padding:2.5rem; border-radius:var(--radius-card);">
+        <div style="font-family:var(--font-headline); color:var(--primary-color); font-size:2.5rem; font-weight:900; letter-spacing:var(--letter-spacing-headline); text-transform:none;">5+</div>
         <div style="color:#aaa; font-size:0.9rem;">Ministerial-level engagements with Technology, ICT, and Health ministries</div>
       </div>
-      <div style="background:var(--black); padding:2rem; border-radius:var(--radius);">
-        <div style="color:var(--red); font-size:2rem; font-weight:900;">6</div>
+      <div style="background:var(--text-primary); padding:2.5rem; border-radius:var(--radius-card);">
+        <div style="font-family:var(--font-headline); color:var(--primary-color); font-size:2.5rem; font-weight:900; letter-spacing:var(--letter-spacing-headline); text-transform:none;">6</div>
         <div style="color:#aaa; font-size:0.9rem;">African nations participating in Yango STEM Fellowship — 30+ fellows, ZMW 1.6M+ invested</div>
       </div>
-      <div style="background:var(--black); padding:2rem; border-radius:var(--radius);">
-        <div style="color:var(--red); font-size:2rem; font-weight:900;">Active</div>
+      <div style="background:var(--text-primary); padding:2.5rem; border-radius:var(--radius-card);">
+        <div style="font-family:var(--font-headline); color:var(--primary-color); font-size:2.5rem; font-weight:900; letter-spacing:var(--letter-spacing-headline); text-transform:none;">Active</div>
         <div style="color:#aaa; font-size:0.9rem;">Partnerships with major African banks, telecoms, and development finance institutions</div>
       </div>
     </div>
@@ -427,50 +528,50 @@
         <div class="pillar-icon">🏥</div>
         <h3>MedTech & Healthcare AI</h3>
         <p>National Medical ID platforms, AI clinical tools, appointment transcription, home diagnostic devices, health analytics dashboards</p>
-        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+        <div style="color:var(--primary-color);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
       </div></a>
       <a href="transport.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
         <div class="pillar-icon">🚌</div>
         <h3>Smart City & Public Transport</h3>
         <p>Digital ticketing, route optimization, fleet management, real-time passenger information, ride-hailing at scale</p>
-        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+        <div style="color:var(--primary-color);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
       </div></a>
       <a href="contact-center.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
         <div class="pillar-icon">🎧</div>
         <h3>AI Contact Centers</h3>
         <p>Multilingual AI voice assistants, 80% auto-handling rate, customer value management, automated quality evaluation</p>
-        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+        <div style="color:var(--primary-color);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
       </div></a>
       <a href="fintech.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
         <div class="pillar-icon">💳</div>
         <h3>FinTech & Digital Payments</h3>
         <p>AI credit scoring, e-KYC, mobile money integration, nano lending, fleet financing, micro-insurance</p>
-        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+        <div style="color:var(--primary-color);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
       </div></a>
       <a href="gov-services.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
         <div class="pillar-icon">🏛️</div>
         <h3>Government Digital Services</h3>
         <p>G2C/G2B portals with 420+ services, digital ID, AI chatbots for citizens, tax & revenue systems, analytics</p>
-        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+        <div style="color:var(--primary-color);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
       </div></a>
       <a href="energy.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
         <div class="pillar-icon">⚡</div>
         <h3>Smart Grid & Energy AI</h3>
         <p>Grid monitoring, revenue protection, predictive asset management, AI customer service — for national power utilities</p>
-        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+        <div style="color:var(--primary-color);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
       </div></a>
       <a href="cloud.html" style="text-decoration:none;color:inherit;"><div class="pillar-card">
         <div class="pillar-icon">☁️</div>
         <h3>Sovereign AI & Cloud</h3>
         <p>National data centers, self-developed hyperscale platform, GPU orchestration, data sovereignty, ~30% TCO savings vs hyperscalers</p>
-        <div style="color:var(--red);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
+        <div style="color:var(--primary-color);font-weight:700;font-size:.85rem;margin-top:.8rem">Explore full solution →</div>
       </div></a>
     </div>
   </div>
 </section>
 
 <!-- ===== MEDTECH DEEP DIVE ===== -->
-<section id="medtech" class="solution-section" style="background:var(--white);">
+<section id="medtech" class="solution-section" style="background:white;">
   <div class="section-inner">
     <div class="solution-header">
       <div class="section-tag">Solution Deep Dive</div>
@@ -503,7 +604,7 @@
         <button class="expand-trigger" onclick="toggleExpand('medtech-extra')">
           More: Knowledge Base, Federated Learning, Fetal Diagnostics ▾
         </button>
-        <a href="medtech.html" style="display:inline-block;color:var(--red);font-weight:700;font-size:.9rem;margin-top:1rem;text-decoration:none">View full MedTech interactive demo →</a>
+        <a href="medtech.html" style="display:inline-block;color:var(--primary-color);font-weight:700;font-size:.9rem;margin-top:1rem;text-decoration:none">View full MedTech interactive demo →</a>
         <div id="medtech-extra" class="expand-content">
           <div style="display:flex; flex-direction:column; gap:1.5rem; padding-top:1rem;">
             <div class="feature-item">
@@ -543,7 +644,7 @@
 </section>
 
 <!-- ===== TRANSPORT DEEP DIVE ===== -->
-<section id="transport" class="solution-section" style="background:var(--gray-bg);">
+<section id="transport" class="solution-section" style="background:var(--body-color);">
   <div class="section-inner">
     <div class="solution-header">
       <div class="section-tag">Solution Deep Dive</div>
@@ -583,12 +684,12 @@
         <div class="impact-stat"><div class="num">26M+</div><div class="desc">Daily trips processed across our global mobility ecosystem</div></div>
         <div class="impact-stat"><div class="num">50M+</div><div class="desc">Daily transactions handled by our payment infrastructure</div></div>
         <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid #333;">
-          <h4 style="color:var(--red); font-size:1rem; margin-bottom:0.8rem;">WHY GOVERNMENTS CHOOSE US</h4>
+          <h4 style="color:var(--primary-color); font-size:1rem; margin-bottom:0.8rem;">WHY GOVERNMENTS CHOOSE US</h4>
           <p style="color:#aaa; font-size:0.88rem; margin-bottom:0.6rem;">✓ Already operational in your country — proven local market knowledge</p>
           <p style="color:#aaa; font-size:0.88rem; margin-bottom:0.6rem;">✓ Own mapping infrastructure — no third-party licensing costs</p>
           <p style="color:#aaa; font-size:0.88rem; margin-bottom:0.6rem;">✓ Mobile-money-first design for unbanked populations</p>
           <p style="color:#aaa; font-size:0.88rem;">✓ Revenue share model — aligned incentives with government</p>
-          <a href="transport.html" style="display:inline-block;color:var(--red);font-weight:700;font-size:.9rem;margin-top:1.5rem;text-decoration:none">View full Transport interactive demo →</a>
+          <a href="transport.html" style="display:inline-block;color:var(--primary-color);font-weight:700;font-size:.9rem;margin-top:1.5rem;text-decoration:none">View full Transport interactive demo →</a>
         </div>
       </div>
     </div>
@@ -596,7 +697,7 @@
 </section>
 
 <!-- ===== AI CONTACT CENTERS ===== -->
-<section id="contact-center" class="solution-section" style="background:var(--white);">
+<section id="contact-center" class="solution-section" style="background:white;">
   <div class="section-inner">
     <div class="solution-header">
       <div class="section-tag">Solution Deep Dive</div>
@@ -629,14 +730,14 @@
         <div class="impact-stat"><div class="num">3×</div><div class="desc">Improvement in customer reachability for outbound campaigns</div></div>
         <div class="impact-stat"><div class="num">40%</div><div class="desc">Higher conversion on outbound upsell campaigns</div></div>
         <div class="impact-stat"><div class="num">8 wks</div><div class="desc">Time to measurable NPS improvement from pilot kickoff</div></div>
-        <a href="contact-center.html" style="display:inline-block;color:var(--red);font-weight:700;font-size:.9rem;margin-top:1.5rem;text-decoration:none">View full Contact Center demo →</a>
+        <a href="contact-center.html" style="display:inline-block;color:var(--primary-color);font-weight:700;font-size:.9rem;margin-top:1.5rem;text-decoration:none">View full Contact Center demo →</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== FINTECH ===== -->
-<section id="fintech" class="solution-section" style="background:var(--gray-bg);">
+<section id="fintech" class="solution-section" style="background:var(--body-color);">
   <div class="section-inner">
     <div class="solution-header">
       <div class="section-tag">Solution Deep Dive</div>
@@ -644,29 +745,29 @@
       <p class="section-subtitle">Partnering with banks, mobile network operators, and governments to expand financial inclusion — from AI credit scoring for thin-file borrowers to micro-insurance distributed via mobile operators.</p>
     </div>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap:1.5rem;">
-      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+      <div style="background:white; border-radius:var(--radius-card); padding:2.5rem;">
         <h4 style="font-weight:800; margin-bottom:0.5rem;">🛡️ AI Credit Scoring</h4>
-        <p style="color:var(--gray-text); font-size:0.9rem;">Alternative data models for thin-file borrowers — using mobile money transaction history, telco data, behavioral signals, and social patterns to assess creditworthiness where traditional bureau data doesn't exist.</p>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">Alternative data models for thin-file borrowers — using mobile money transaction history, telco data, behavioral signals, and social patterns to assess creditworthiness where traditional bureau data doesn't exist.</p>
       </div>
-      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+      <div style="background:white; border-radius:var(--radius-card); padding:2.5rem;">
         <h4 style="font-weight:800; margin-bottom:0.5rem;">📱 e-KYC & Digital Onboarding</h4>
-        <p style="color:var(--gray-text); font-size:0.9rem;">Full digital customer onboarding — document verification, liveness detection, biometric matching. Compliant with local regulations. Reduces onboarding from days to minutes.</p>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">Full digital customer onboarding — document verification, liveness detection, biometric matching. Compliant with local regulations. Reduces onboarding from days to minutes.</p>
       </div>
-      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+      <div style="background:white; border-radius:var(--radius-card); padding:2.5rem;">
         <h4 style="font-weight:800; margin-bottom:0.5rem;">💰 Mobile Money Integration</h4>
-        <p style="color:var(--gray-text); font-size:0.9rem;">Collections and disbursements via M-Pesa, Airtel Money, and local mobile wallet providers. Seamless API integration for banks and merchants. Built for markets with 70%+ mobile money penetration.</p>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">Collections and disbursements via M-Pesa, Airtel Money, and local mobile wallet providers. Seamless API integration for banks and merchants. Built for markets with 70%+ mobile money penetration.</p>
       </div>
-      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+      <div style="background:white; border-radius:var(--radius-card); padding:2.5rem;">
         <h4 style="font-weight:800; margin-bottom:0.5rem;">⚡ Nano & Micro Lending</h4>
-        <p style="color:var(--gray-text); font-size:0.9rem;">AI-powered instant loan decisioning for amounts from $5 to $500. Automated risk assessment, disbursement, and mobile money repayment collection. Sub-second decision time.</p>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">AI-powered instant loan decisioning for amounts from $5 to $500. Automated risk assessment, disbursement, and mobile money repayment collection. Sub-second decision time.</p>
       </div>
-      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+      <div style="background:white; border-radius:var(--radius-card); padding:2.5rem;">
         <h4 style="font-weight:800; margin-bottom:0.5rem;">🚗 Fleet & Asset Financing</h4>
-        <p style="color:var(--gray-text); font-size:0.9rem;">Vehicle and 3-wheeler financing with GPS tracking, usage-based insurance, and automated mobile money repayment. Enables asset ownership for drivers and small businesses.</p>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">Vehicle and 3-wheeler financing with GPS tracking, usage-based insurance, and automated mobile money repayment. Enables asset ownership for drivers and small businesses.</p>
       </div>
-      <div style="background:var(--white); border-radius:var(--radius); padding:2rem; border-left:3px solid var(--red);">
+      <div style="background:white; border-radius:var(--radius-card); padding:2.5rem;">
         <h4 style="font-weight:800; margin-bottom:0.5rem;">🏥 Micro-Insurance</h4>
-        <p style="color:var(--gray-text); font-size:0.9rem;">Health, life, device, and crop protection products — embedded distribution via mobile operators and banks. Low-premium, high-volume models designed for emerging market populations.</p>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">Health, life, device, and crop protection products — embedded distribution via mobile operators and banks. Low-premium, high-volume models designed for emerging market populations.</p>
       </div>
     </div>
   </div>
@@ -677,33 +778,33 @@
   <div class="section-inner">
     <div class="solution-header">
       <div class="section-tag">Solution Deep Dive</div>
-      <h2 class="section-title" style="color:var(--white);">Government Digital Services</h2>
+      <h2 class="section-title" style="color:white;">Government Digital Services</h2>
       <p class="section-subtitle">Enabling e-Government transformation with production-grade platforms already deployed at national scale — serving millions of citizens and hundreds of government agencies.</p>
     </div>
     <div class="solution-grid">
       <div class="solution-features">
         <div class="feature-item">
           <div class="feature-icon">🖥️</div>
-          <div><h4 style="color:var(--white);">G2C & G2B Digital Portal</h4><p style="color:#aaa;">Unified citizen-facing portal with 420+ public services in digital format — business licenses, passport renewals, permit applications, tax filings. Deployed and serving millions at national scale.</p></div>
+          <div><h4 style="color:white;">G2C & G2B Digital Portal</h4><p style="color:#aaa;">Unified citizen-facing portal with 420+ public services in digital format — business licenses, passport renewals, permit applications, tax filings. Deployed and serving millions at national scale.</p></div>
         </div>
         <div class="feature-item">
           <div class="feature-icon">🤖</div>
-          <div><h4 style="color:var(--white);">AI Assistant for Government</h4><p style="color:#aaa;">AI chatbot handling G2C and G2B inquiries, integrated with government portals and backend systems. Plus: analytics assistant that generates dashboards without SQL or IT support.</p></div>
+          <div><h4 style="color:white;">AI Assistant for Government</h4><p style="color:#aaa;">AI chatbot handling G2C and G2B inquiries, integrated with government portals and backend systems. Plus: analytics assistant that generates dashboards without SQL or IT support.</p></div>
         </div>
         <div class="feature-item">
           <div class="feature-icon">🔎</div>
-          <div><h4 style="color:var(--white);">Smart Search Across Portals</h4><p style="color:#aaa;">AI assistant answering natural language queries across structured data, PDFs, scanned documents, and knowledge bases — making government information instantly accessible.</p></div>
+          <div><h4 style="color:white;">Smart Search Across Portals</h4><p style="color:#aaa;">AI assistant answering natural language queries across structured data, PDFs, scanned documents, and knowledge bases — making government information instantly accessible.</p></div>
         </div>
         <div class="feature-item">
           <div class="feature-icon">🪪</div>
-          <div><h4 style="color:var(--white);">Digital Identity & Integration</h4><p style="color:#aaa;">National digital ID systems enabling data sharing and instant verification across government agencies. Foundation for financial inclusion, healthcare access, and social protection programs.</p></div>
+          <div><h4 style="color:white;">Digital Identity & Integration</h4><p style="color:#aaa;">National digital ID systems enabling data sharing and instant verification across government agencies. Foundation for financial inclusion, healthcare access, and social protection programs.</p></div>
         </div>
         <div class="feature-item">
           <div class="feature-icon">💵</div>
-          <div><h4 style="color:var(--white);">Tax & Revenue Systems</h4><p style="color:#aaa;">AI-powered systems to withhold tax at the moment of transaction, improve collection rates, and reduce leakage. Real-time payment interoperability across banks and mobile money.</p></div>
+          <div><h4 style="color:white;">Tax & Revenue Systems</h4><p style="color:#aaa;">AI-powered systems to withhold tax at the moment of transaction, improve collection rates, and reduce leakage. Real-time payment interoperability across banks and mobile money.</p></div>
         </div>
       </div>
-      <div class="impact-box" style="background:var(--dark-card);">
+      <div class="impact-box" style="background:var(--surface-dark);">
         <h3>WHY THIS MATTERS</h3>
         <div style="margin-bottom:1.5rem;">
           <p style="color:#aaa; font-size:0.95rem; margin-bottom:1rem;">Africa's governments are rapidly digitizing. The countries that move fastest will see:</p>
@@ -712,7 +813,7 @@
         <div class="impact-stat"><div class="num">24/7</div><div class="desc">Citizen service availability via AI assistants — no queues, no office hours</div></div>
         <div class="impact-stat"><div class="num">Real-time</div><div class="desc" style="font-size:0.85rem;">Revenue oversight, expenditure tracking, and performance monitoring for ministers</div></div>
         <div style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid #333;">
-          <p style="color:var(--red); font-weight:700; font-size:0.9rem;">ALIGNMENT WITH AFRICAN DIGITAL AGENDAS</p>
+          <p style="color:var(--primary-color); font-weight:700; font-size:0.9rem;">ALIGNMENT WITH AFRICAN DIGITAL AGENDAS</p>
           <p style="color:#888; font-size:0.85rem; margin-top:0.5rem;">Our solutions align with the African Union's Digital Transformation Strategy, Smart Africa Alliance objectives, and individual national ICT masterplans.</p>
         </div>
       </div>
@@ -721,7 +822,7 @@
 </section>
 
 <!-- ===== CLOUD ===== -->
-<section id="cloud" class="solution-section" style="background:var(--white);">
+<section id="cloud" class="solution-section" style="background:white;">
   <div class="section-inner">
     <div class="solution-header">
       <div class="section-tag">Solution Deep Dive</div>
@@ -732,18 +833,18 @@
       <div>
         <h3 style="font-weight:800; margin-bottom:1.5rem;">Full-Stack Cloud Platform</h3>
         <div style="display:flex; flex-direction:column; gap:0;">
-          <div style="background:var(--red); color:white; padding:1rem 1.5rem; border-radius:var(--radius) var(--radius) 0 0; font-weight:700;">Applications (SaaS) — Business tools, marketplace</div>
+          <div style="background:var(--primary-color); color:white; padding:1rem 1.5rem; border-radius:var(--radius-card) var(--radius-card) 0 0; font-weight:700;">Applications (SaaS) — Business tools, marketplace</div>
           <div style="background:#333; color:white; padding:1rem 1.5rem; font-weight:600;">Platform Services (PaaS) — Containers, ML, data platform</div>
           <div style="background:#555; color:white; padding:1rem 1.5rem; font-weight:600;">Infrastructure (IaaS) — Compute, storage, network, security</div>
-          <div style="background:#777; color:white; padding:1rem 1.5rem; border-radius:0 0 var(--radius) var(--radius); font-weight:600;">Data Centers — In-house designed server racks</div>
+          <div style="background:#777; color:white; padding:1rem 1.5rem; border-radius:0 0 var(--radius-card) var(--radius-card); font-weight:600;">Data Centers — In-house designed server racks</div>
         </div>
         <div style="margin-top:2rem;">
           <h4 style="font-weight:800; margin-bottom:1rem;">On-Premise Products</h4>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-            <div style="background:var(--gray-bg); padding:1rem; border-radius:0.5rem;"><strong>YDB</strong><br><span style="color:var(--gray-text); font-size:0.85rem;">Distributed database for complex data processing</span></div>
-            <div style="background:var(--gray-bg); padding:1rem; border-radius:0.5rem;"><strong>DataLens</strong><br><span style="color:var(--gray-text); font-size:0.85rem;">Data visualization and interactive reporting</span></div>
-            <div style="background:var(--gray-bg); padding:1rem; border-radius:0.5rem;"><strong>YTsaurus</strong><br><span style="color:var(--gray-text); font-size:0.85rem;">MapReduce, dynamic tables, batch processing</span></div>
-            <div style="background:var(--gray-bg); padding:1rem; border-radius:0.5rem;"><strong>AI Studio</strong><br><span style="color:var(--gray-text); font-size:0.85rem;">ML development, LLM APIs, cognitive services</span></div>
+            <div style="background:var(--body-color); padding:1rem; border-radius:0.5rem;"><strong>YDB</strong><br><span style="color:var(--text-secondary); font-size:0.85rem;">Distributed database for complex data processing</span></div>
+            <div style="background:var(--body-color); padding:1rem; border-radius:0.5rem;"><strong>DataLens</strong><br><span style="color:var(--text-secondary); font-size:0.85rem;">Data visualization and interactive reporting</span></div>
+            <div style="background:var(--body-color); padding:1rem; border-radius:0.5rem;"><strong>YTsaurus</strong><br><span style="color:var(--text-secondary); font-size:0.85rem;">MapReduce, dynamic tables, batch processing</span></div>
+            <div style="background:var(--body-color); padding:1rem; border-radius:0.5rem;"><strong>AI Studio</strong><br><span style="color:var(--text-secondary); font-size:0.85rem;">ML development, LLM APIs, cognitive services</span></div>
           </div>
         </div>
       </div>
@@ -755,14 +856,14 @@
         <div class="impact-stat"><div class="num" style="font-size:1.2rem; min-width:130px;">💰 ~30% Savings</div><div class="desc">Average TCO savings compared to AWS, GCP, and Azure.</div></div>
         <div class="impact-stat"><div class="num" style="font-size:1.2rem; min-width:130px;">🤝 Flexible</div><div class="desc">Open to reseller, solution partner, or strategic partnership models.</div></div>
         <div class="impact-stat"><div class="num" style="font-size:1.2rem; min-width:130px;">⚙️ Hardware</div><div class="desc">In-house designed server racks and hardware. Full supply chain management and R&D.</div></div>
-        <a href="cloud.html" style="display:inline-block;color:var(--red);font-weight:700;font-size:.9rem;margin-top:1.5rem;text-decoration:none">View full Sovereign Cloud deep dive →</a>
+        <a href="cloud.html" style="display:inline-block;color:var(--primary-color);font-weight:700;font-size:.9rem;margin-top:1.5rem;text-decoration:none">View full Sovereign Cloud deep dive →</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== HOW WE WORK ===== -->
-<section id="how" style="background:var(--gray-bg); padding:5rem 2rem;">
+<section id="how" style="background:var(--body-color); padding:5rem 2rem;">
   <div class="section-inner">
     <div class="section-tag">Engagement Model</div>
     <h2 class="section-title">How we work with governments</h2>
@@ -798,9 +899,13 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="logo">YANGO <span style="color:var(--red);">TECH</span></div>
-  <p style="margin-top:0.5rem;">Technology for national development · 35+ countries · Dubai, UAE</p>
-  <p style="margin-top:1rem; font-size:0.8rem; color:#555;">Confidential — Prepared for the African Ambassadors Event, Moscow 2026</p>
+  <div class="logo">
+    <img src="https://avatars.mds.yandex.net/get-lpc/14837328/21641dca-3288-4eeb-8d99-81f8cb31a763/orig" alt="Yango Tech" width="176" height="30">
+  </div>
+  <p style="margin-top:1rem;">Technology for national development · 35+ countries · Dubai, UAE</p>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Yango Tech · Confidential — Prepared for the African Ambassadors Event, Moscow 2026</p>
+  </div>
 </footer>
 
 <script>

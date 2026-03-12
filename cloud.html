@@ -4,102 +4,171 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sovereign AI & Cloud Infrastructure — Yango Tech</title>
+<link rel="preload" as="font" href="https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline.woff2" crossorigin="anonymous">
+<link rel="preload" as="font" href="https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Regular.woff2" crossorigin="anonymous">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-:root{--red:#FF1A1A;--black:#141414;--white:#FFF;--gray:#7A7A7A;--gray-bg:#F5F5F5;--dark:#1E1E1E;--radius:1rem;--max-w:1280px}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:var(--black);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(20,20,20,.97);backdrop-filter:blur(12px);border-bottom:2px solid var(--red)}
-.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.7rem 2rem}
-.logo{font-weight:900;font-size:1.2rem;color:var(--white);letter-spacing:.12em;text-decoration:none}
-.logo span{color:var(--red)}
+/* === FONT-FACE DECLARATIONS === */
+@font-face { font-family:"Yango Headline"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline.woff") format("woff"); font-weight:900; font-style:normal; font-display:swap; }
+@font-face { font-family:"Yango Headline"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline-Italic.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoHeadline/YangoHeadline-Italic.woff") format("woff"); font-weight:900; font-style:italic; font-display:swap; }
+@font-face { font-family:"Yango Group Text"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Regular.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:"Yango Group Text"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Medium.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Medium.woff") format("woff"); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:"Yango Group Text"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Bold.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Bold.woff") format("woff"); font-weight:600; font-style:normal; font-display:swap; }
+@font-face { font-family:"Yango Group Text"; src:url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Black.woff2") format("woff2"), url("https://yastatic.net/s3/distribution/lpc/fonts/YangoGroupText/YangoGroupText-Black.woff2") format("woff"); font-weight:900; font-style:normal; font-display:swap; }
+@font-face { font-family:"YS Text"; src:url("https://yastatic.net/s3/home/fonts/ys/4/text-regular.woff2") format("woff2"), url("https://yastatic.net/s3/home/fonts/ys/4/text-regular.woff") format("woff"); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:"YS Text"; src:url("https://yastatic.net/s3/home/fonts/ys/4/text-medium.woff2") format("woff2"), url("https://yastatic.net/s3/home/fonts/ys/4/text-medium.woff") format("woff"); font-weight:500; font-style:normal; font-display:swap; }
+
+/* === DESIGN TOKENS === */
+:root{
+  --primary-color:#FF1A1A;--body-color:#F5F5F5;--text-primary:#141414;--text-secondary:#7A7A7A;
+  --text-on-dark:#F5F5F5;--surface-dark:#232323;--surface-mid:#323232;
+  --border-color:rgba(196,196,196,1);
+  --font-headline:"Yango Headline",Helvetica,Arial,sans-serif;
+  --font-body:"Yango Group Text","YS Text",Helvetica,Arial,sans-serif;
+  --letter-spacing-body:0.2em;--letter-spacing-headline:calc(1em/50);
+  --radius-card:1.875rem;--radius-btn:2rem;--radius-pill:2rem;
+  --transition-fast:0.2s ease-in-out;--transition-image:1.2s ease-in-out;
+  --max-w:116rem;--yt-padding:1.87rem
+}
+@media(max-width:1439px){:root{--yt-padding:1.25rem}}
+
+/* === RESET & BASE === */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--font-body);font-weight:400;font-size:1rem;line-height:1.6;color:var(--text-primary);background-color:var(--body-color);text-transform:uppercase;letter-spacing:var(--letter-spacing-body);font-variant-numeric:proportional-nums;-webkit-font-smoothing:antialiased}
+::selection{background:var(--primary-color);color:white}
+a{color:inherit;text-decoration:none;transition:var(--transition-fast)}
+img{max-width:100%;height:auto;display:block}
+
+/* === NAVIGATION === */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem var(--yt-padding)}
+nav::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5)0%,transparent 100%);pointer-events:none;z-index:-1}
+.nav-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.logo img{height:30px;width:auto;filter:invert(1)}
+.nav-links{display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center}
+.nav-links a{padding:1.1rem 1rem;font-size:0.75rem;font-weight:500;letter-spacing:var(--letter-spacing-body);text-transform:uppercase;color:var(--text-on-dark);text-decoration:none;transition:var(--transition-fast)}
+.nav-links:hover a:not(:hover){opacity:0.4}
+.nav-links a:hover{color:var(--primary-color)}
+.nav-links a.active{color:var(--primary-color)}
+.nav-cta{display:inline-flex;align-items:center;justify-content:center;padding:0.75rem 1.5rem;background:var(--surface-dark);color:var(--text-on-dark);border:none;border-radius:var(--radius-btn);font-family:var(--font-body);font-weight:500;font-size:0.75rem;letter-spacing:var(--letter-spacing-body);text-transform:uppercase;text-decoration:none;cursor:pointer;transition:var(--transition-fast)}
+.nav-cta:hover{background:var(--primary-color);color:white}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text-on-dark);margin:5px 0;transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(20,20,20,.98);backdrop-filter:blur(12px);padding:1.5rem 2rem;flex-direction:column;gap:1rem;border-bottom:1px solid rgba(255,255,255,0.1);z-index:99}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--text-on-dark);text-decoration:none;font-size:0.75rem;font-weight:500;padding:.5rem 0;letter-spacing:var(--letter-spacing-body);text-transform:uppercase}
+.mobile-menu a:hover{color:var(--primary-color)}
+.mobile-menu a.active{color:var(--primary-color)}
+
+/* === LAYOUT === */
 .nav-back{color:#ccc;text-decoration:none;font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:.4rem}
-.nav-back:hover{color:var(--white)}
+.nav-back:hover{color:white}
 section{padding:4rem 2rem}
 .inner{max-width:var(--max-w);margin:0 auto}
-.tag{color:var(--red);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
-.hero-sub{background:var(--black);min-height:55vh;display:flex;align-items:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
+.tag{color:var(--primary-color);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
+
+/* === HERO === */
+.hero-sub{background:var(--text-primary);min-height:55vh;display:flex;align-items:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
 .hero-sub::before{content:'';position:absolute;top:-40%;right:-15%;width:70%;height:180%;background:radial-gradient(ellipse,rgba(255,26,26,.07)0%,transparent 70%);pointer-events:none}
 .hero-sub .inner{position:relative;z-index:1;width:100%}
-.hero-sub h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:var(--white);line-height:1.05;max-width:850px;margin-bottom:1rem}
-.hero-sub .subtitle{color:var(--gray);font-size:1.1rem;max-width:700px;margin-bottom:2rem}
+.hero-sub h1{font-family:var(--font-headline);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;color:white;line-height:85%;letter-spacing:var(--letter-spacing-headline);text-transform:none;max-width:850px;margin-bottom:1rem}
+.hero-sub .subtitle{color:var(--text-secondary);font-size:1.1rem;max-width:700px;margin-bottom:2rem}
 .stats-row{display:flex;gap:2.5rem;flex-wrap:wrap}
-.stat .n{font-size:2rem;font-weight:900;color:var(--red);line-height:1}
-.stat .l{color:var(--gray);font-size:.82rem;margin-top:.2rem}
-h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;line-height:1.1;margin-bottom:.8rem}
-h3{font-size:1.15rem;font-weight:800;margin-bottom:.5rem}
+.stat .n{font-family:var(--font-headline);font-size:2rem;font-weight:900;color:var(--primary-color);line-height:1}
+.stat .l{color:var(--text-secondary);font-size:.82rem;margin-top:.2rem}
+
+/* === TYPOGRAPHY === */
+h2{font-family:var(--font-headline);font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;line-height:90%;letter-spacing:var(--letter-spacing-headline);text-transform:none;margin-bottom:.8rem}
+h3{font-family:var(--font-headline);font-size:1.15rem;font-weight:900;letter-spacing:var(--letter-spacing-headline);text-transform:none;margin-bottom:.5rem}
+
+/* === GRIDS === */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
-.card{background:var(--gray-bg);border-radius:var(--radius);padding:2rem;border-top:3px solid var(--red);transition:transform .3s,box-shadow .3s}
-.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.06)}
+
+/* === CARDS === */
+.card{background:white;border-radius:var(--radius-card);padding:2.5rem;transition:transform .3s}
+.card:hover{transform:translateY(-3px)}
 .card h4{font-weight:800;margin-bottom:.4rem}
-.card p{color:var(--gray);font-size:.88rem}
-.dark-card{background:var(--dark);border-radius:var(--radius);padding:2rem;color:var(--white)}
-.dark-card h3{color:var(--red)}
+.card p{color:var(--text-secondary);font-size:.88rem}
+.dark-card{background:var(--surface-dark);border-radius:var(--radius-card);padding:2rem;color:white}
+.dark-card h3{color:var(--primary-color)}
 .dark-card p{color:#aaa;font-size:.9rem}
+
+/* === METRICS === */
 .metric-row{display:flex;gap:.5rem;align-items:baseline;padding:1rem 0;border-bottom:1px solid #333}
 .metric-row:last-child{border:none}
-.metric-row .n{font-size:1.6rem;font-weight:900;color:var(--red);min-width:90px}
+.metric-row .n{font-family:var(--font-headline);font-size:1.6rem;font-weight:900;color:var(--primary-color);min-width:90px}
 .metric-row .d{color:#aaa;font-size:.88rem}
+
+/* === FEATURES === */
 .feat{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem}
-.feat-icon{width:44px;height:44px;min-width:44px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem}
+.feat-icon{width:44px;height:44px;min-width:44px;background:var(--primary-color);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem}
 .feat h4{font-size:.95rem;font-weight:700;margin-bottom:.2rem}
-.feat p{color:var(--gray);font-size:.85rem}
-.cta-bar{background:var(--red);color:white;text-align:center;padding:3.5rem 2rem;margin-top:3rem}
+.feat p{color:var(--text-secondary);font-size:.85rem}
+
+/* === CTA === */
+.cta-bar{background:var(--primary-color);color:white;text-align:center;padding:3.5rem 2rem;margin-top:3rem}
 .cta-bar h2{color:white;margin-bottom:.8rem}
 .cta-bar p{max-width:550px;margin:0 auto 1.5rem;opacity:.9;font-size:1rem}
-.cta-btn{display:inline-block;background:var(--black);color:var(--white);padding:.9rem 2.2rem;border-radius:var(--radius);text-decoration:none;font-weight:700;transition:transform .2s}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
-footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:center;font-size:.82rem}
+.cta-btn{display:inline-flex;align-items:center;justify-content:center;background:var(--text-primary);color:white;padding:1rem 2.5rem;border-radius:var(--radius-btn);text-decoration:none;font-family:var(--font-body);font-weight:500;font-size:0.875rem;letter-spacing:var(--letter-spacing-body);text-transform:uppercase;transition:var(--transition-fast)}
+.cta-btn:hover{background:#000;color:white}
+
+/* === DASHBOARD === */
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
-.dash-card{background:var(--dark);border-radius:.8rem;padding:1.5rem;color:white}
+.dash-card{background:var(--surface-dark);border-radius:var(--radius-card);padding:1.5rem;color:white}
 .dash-card .change{font-size:.75rem;padding:.15rem .5rem;border-radius:4px;display:inline-block;margin-bottom:.5rem}
 .dash-card .change.up{background:rgba(34,197,94,.15);color:#22c55e}
 .dash-card .change.down{background:rgba(239,68,68,.15);color:#ef4444}
-.dash-card .val{font-size:1.8rem;font-weight:900;margin-bottom:.2rem}
+.dash-card .val{font-family:var(--font-headline);font-size:1.8rem;font-weight:900;margin-bottom:.2rem}
 .dash-card .lbl{color:#888;font-size:.8rem}
+
+/* === ARCHITECTURE === */
 .arch-layer{padding:1.2rem 1.8rem;font-weight:600;color:white;font-size:.95rem;display:flex;justify-content:space-between;align-items:center}
-.arch-layer:first-child{border-radius:var(--radius) var(--radius) 0 0}
-.arch-layer:last-child{border-radius:0 0 var(--radius) var(--radius)}
+.arch-layer:first-child{border-radius:var(--radius-card) var(--radius-card) 0 0}
+.arch-layer:last-child{border-radius:0 0 var(--radius-card) var(--radius-card)}
 .arch-layer .detail{font-size:.75rem;font-weight:400;opacity:.7}
+
+/* === COMPARE TABLE === */
 .compare-table{width:100%;border-collapse:collapse;margin-top:1.5rem}
 .compare-table th,.compare-table td{padding:.8rem 1rem;text-align:left;font-size:.88rem}
-.compare-table th{color:var(--gray);font-weight:600;border-bottom:2px solid var(--red);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em}
-.compare-table td{border-bottom:1px solid #eee;color:var(--black)}
+.compare-table th{color:var(--text-secondary);font-weight:600;border-bottom:2px solid var(--primary-color);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em}
+.compare-table td{border-bottom:1px solid #eee;color:var(--text-primary)}
 .compare-table tr:last-child td{border:none}
 .compare-table .highlight{background:rgba(255,26,26,.05)}
-.compare-table .yango{font-weight:800;color:var(--red)}
+.compare-table .yango{font-weight:800;color:var(--primary-color)}
+
+/* === PARTNERS === */
 .partner-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
-.partner-card{background:var(--dark);border-radius:var(--radius);padding:2rem;border-left:3px solid var(--red)}
-.partner-card h4{color:var(--red);font-size:1rem;margin-bottom:.5rem}
+.partner-card{background:var(--surface-dark);border-radius:var(--radius-card);padding:2rem}
+.partner-card h4{color:var(--primary-color);font-size:1rem;margin-bottom:.5rem}
 .partner-card p{color:#aaa;font-size:.85rem}
+
+/* === SERVICES === */
 .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-top:1.5rem}
-.service-chip{background:var(--gray-bg);border-radius:.6rem;padding:1rem;text-align:center}
+.service-chip{background:var(--body-color);border-radius:var(--radius-card);padding:1rem;text-align:center}
 .service-chip .icon{font-size:1.5rem;margin-bottom:.3rem}
 .service-chip h5{font-size:.82rem;font-weight:700}
-.service-chip p{font-size:.72rem;color:var(--gray)}
-.nav-links{display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center}
-.nav-links a{color:#ccc;text-decoration:none;font-size:.82rem;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--white)}
-.nav-links a.active{color:var(--red)}
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
-.hamburger span{display:block;width:22px;height:2px;background:#ccc;margin:5px 0;transition:all .3s}
-.mobile-menu{display:none;position:fixed;top:52px;left:0;right:0;background:rgba(20,20,20,.98);padding:1.5rem 2rem;flex-direction:column;gap:1rem;border-bottom:2px solid var(--red);z-index:99}
-.mobile-menu.open{display:flex}
-.mobile-menu a{color:#ccc;text-decoration:none;font-size:.95rem;font-weight:500;padding:.3rem 0}
-.mobile-menu a:hover{color:var(--white)}
-.mobile-menu a.active{color:var(--red)}
+.service-chip p{font-size:.72rem;color:var(--text-secondary)}
+
+/* === IMPACT BOX === */
+.impact-box{border-radius:var(--radius-card);border:1px solid rgba(255,255,255,0.1)}
+
+/* === FOOTER === */
+footer{background:var(--text-primary);color:var(--text-on-dark);padding:4rem var(--yt-padding) 2rem;text-align:center}
+footer .logo img{height:30px;width:auto;filter:invert(1);margin:0 auto}
+footer p{font-size:0.75rem;font-weight:500;color:rgba(245,245,245,0.5)}
+.footer-bottom{margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1)}
+
+/* === RESPONSIVE === */
 @media(max-width:900px){.grid2{grid-template-columns:1fr}.stats-row{gap:1.5rem}.compare-table{font-size:.8rem}.compare-table th,.compare-table td{padding:.5rem}.nav-links{display:none}.hamburger{display:block}}
 @media(max-width:600px){.dash-grid{grid-template-columns:1fr}.services-grid{grid-template-columns:1fr 1fr}}
 </style>
-<title>Sovereign AI & Cloud Infrastructure — Yango Tech</title>
 </head>
 <body>
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo">YANGO <span>TECH</span></a>
+    <a href="index.html" class="logo"><img src="https://avatars.mds.yandex.net/get-lpc/14837328/21641dca-3288-4eeb-8d99-81f8cb31a763/orig" alt="Yango Tech" width="176" height="30"></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="medtech.html">MedTech</a>
@@ -109,6 +178,7 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
       <a href="gov-services.html">Government</a>
       <a href="energy.html">Energy</a>
       <a href="cloud.html" class="active">Cloud &amp; AI</a>
+      <a href="mailto:eechernikov@yango-team.com" class="nav-cta">Contact Us</a>
     </div>
     <button class="hamburger" onclick="document.getElementById('mob-menu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -124,6 +194,7 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
   <a href="gov-services.html">Government</a>
   <a href="energy.html">Energy</a>
   <a href="cloud.html" class="active">Cloud &amp; AI</a>
+  <a href="mailto:eechernikov@yango-team.com">Contact Us</a>
 </div>
 
 <!-- HERO -->
@@ -142,11 +213,11 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
 </section>
 
 <!-- WHY SOVEREIGN -->
-<section style="background:var(--gray-bg)">
+<section style="background:var(--body-color)">
   <div class="inner">
     <div class="tag">The Imperative</div>
     <h2>Why Africa Needs Sovereign Cloud</h2>
-    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">African nations are generating massive amounts of data — healthcare records, financial transactions, citizen identity, energy grids. Where that data lives and who controls it is a matter of national security.</p>
+    <p style="color:var(--text-secondary);max-width:700px;margin-bottom:2rem">African nations are generating massive amounts of data — healthcare records, financial transactions, citizen identity, energy grids. Where that data lives and who controls it is a matter of national security.</p>
     <div class="grid3">
       <div class="card">
         <h4>🏛️ Data Sovereignty</h4>
@@ -181,12 +252,12 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
   <div class="inner">
     <div class="tag">Platform Architecture</div>
     <h2>Self-Developed Full-Stack Cloud</h2>
-    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Every layer built in-house — from hardware design to SaaS applications. No dependency on third-party software vendors at any level.</p>
+    <p style="color:var(--text-secondary);max-width:700px;margin-bottom:2rem">Every layer built in-house — from hardware design to SaaS applications. No dependency on third-party software vendors at any level.</p>
 
     <div class="grid2">
       <div>
         <div style="display:flex;flex-direction:column;gap:0">
-          <div class="arch-layer" style="background:var(--red)">
+          <div class="arch-layer" style="background:var(--primary-color)">
             <span>Applications (SaaS)</span>
             <span class="detail">Business tools · Third-party marketplace</span>
           </div>
@@ -211,10 +282,10 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
         <div style="margin-top:2rem">
           <h3>Console & Management</h3>
           <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem">
-            <div style="background:var(--gray-bg);padding:.8rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600">Single User Experience</div>
-            <div style="background:var(--gray-bg);padding:.8rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600">Console & Dashboard</div>
-            <div style="background:var(--gray-bg);padding:.8rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600">Billing & Metering</div>
-            <div style="background:var(--gray-bg);padding:.8rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600">24/7 Technical Support</div>
+            <div style="background:var(--body-color);padding:.8rem 1.2rem;border-radius:var(--radius-card);font-size:.85rem;font-weight:600">Single User Experience</div>
+            <div style="background:var(--body-color);padding:.8rem 1.2rem;border-radius:var(--radius-card);font-size:.85rem;font-weight:600">Console & Dashboard</div>
+            <div style="background:var(--body-color);padding:.8rem 1.2rem;border-radius:var(--radius-card);font-size:.85rem;font-weight:600">Billing & Metering</div>
+            <div style="background:var(--body-color);padding:.8rem 1.2rem;border-radius:var(--radius-card);font-size:.85rem;font-weight:600">24/7 Technical Support</div>
           </div>
         </div>
       </div>
@@ -237,7 +308,7 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
 </section>
 
 <!-- ON-PREMISE PRODUCTS -->
-<section style="background:var(--black);color:white">
+<section style="background:var(--text-primary);color:white">
   <div class="inner">
     <div class="tag">On-Premise Products</div>
     <h2 style="color:white">Enterprise-Grade Tools for National Deployment</h2>
@@ -248,40 +319,40 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
         <h3>YDB — Distributed Database</h3>
         <p style="margin-top:.5rem">Horizontally scalable distributed SQL database designed for mission-critical workloads. ACID transactions at scale, automatic failover, multi-region replication.</p>
         <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">SQL + NoSQL</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">ACID</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Multi-region</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Auto-failover</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">SQL + NoSQL</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">ACID</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">Multi-region</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">Auto-failover</div>
         </div>
       </div>
       <div class="dark-card" style="background:#252525">
         <h3>DataLens — BI & Visualization</h3>
         <p style="margin-top:.5rem">Data visualization, analysis, and interactive reporting platform. Connect to any data source, build dashboards without code, share across organizations.</p>
         <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">90+ dashboards</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">No-code</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Real-time</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Multi-source</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">90+ dashboards</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">No-code</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">Real-time</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">Multi-source</div>
         </div>
       </div>
       <div class="dark-card" style="background:#252525">
         <h3>YTsaurus — Big Data Platform</h3>
         <p style="margin-top:.5rem">MapReduce, dynamic tables, batch and stream processing at petabyte scale. SDK, UI, and CLI interfaces for data engineering teams.</p>
         <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">MapReduce</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Dynamic Tables</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">SPYT (Spark)</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Petabyte-scale</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">MapReduce</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">Dynamic Tables</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">SPYT (Spark)</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">Petabyte-scale</div>
         </div>
       </div>
       <div class="dark-card" style="background:#252525">
         <h3>AI Studio — ML Development</h3>
         <p style="margin-top:.5rem">Complete ML lifecycle management — experiment tracking, model training on GPU clusters, deployment, monitoring. Includes LLM APIs and cognitive services.</p>
         <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap">
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">GPU training</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">LLM APIs</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Cognitive services</div>
-          <div style="background:#333;padding:.5rem 1rem;border-radius:.3rem;font-size:.8rem;color:#aaa">Model registry</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">GPU training</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">LLM APIs</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">Cognitive services</div>
+          <div style="background:#333;padding:.5rem 1rem;border-radius:var(--radius-card);font-size:.8rem;color:#aaa">Model registry</div>
         </div>
       </div>
     </div>
@@ -293,7 +364,7 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
   <div class="inner">
     <div class="tag">AI & ML Layer</div>
     <h2>AI-Native Cloud — Not an Afterthought</h2>
-    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Unlike hyperscalers where AI is an add-on, our platform was built with ML/AI at its core — from GPU orchestration to production model serving.</p>
+    <p style="color:var(--text-secondary);max-width:700px;margin-bottom:2rem">Unlike hyperscalers where AI is an add-on, our platform was built with ML/AI at its core — from GPU orchestration to production model serving.</p>
 
     <div class="grid2">
       <div>
@@ -312,8 +383,8 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
             <div class="dash-card"><div class="change up">▲ Global</div><div class="val">26M+</div><div class="lbl">Daily AI interactions</div></div>
             <div class="dash-card"><div class="change up">▲ Local</div><div class="val">100%</div><div class="lbl">On-premise — data stays in-country</div></div>
           </div>
-          <div style="margin-top:1.5rem;padding:1.2rem;background:#252525;border-radius:.5rem">
-            <p style="color:var(--red);font-weight:700;font-size:.85rem">AI MODEL REGISTRY</p>
+          <div style="margin-top:1.5rem;padding:1.2rem;background:#252525;border-radius:var(--radius-card)">
+            <p style="color:var(--primary-color);font-weight:700;font-size:.85rem">AI MODEL REGISTRY</p>
             <div style="margin-top:.8rem">
               <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid #333;font-size:.82rem"><span style="color:white">Grid Load Forecasting</span><span style="color:#22c55e">● Active</span></div>
               <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid #333;font-size:.82rem"><span style="color:white">Medical Image Classification</span><span style="color:#22c55e">● Active</span></div>
@@ -330,13 +401,13 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
 </section>
 
 <!-- TCO COMPARISON -->
-<section style="background:var(--gray-bg)">
+<section style="background:var(--body-color)">
   <div class="inner">
     <div class="tag">Cost Advantage</div>
     <h2>~30% TCO Savings vs Global Hyperscalers</h2>
-    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Competitive pricing with no licensing markups, no egress fees surprise, and partnership-oriented commercial models.</p>
+    <p style="color:var(--text-secondary);max-width:700px;margin-bottom:2rem">Competitive pricing with no licensing markups, no egress fees surprise, and partnership-oriented commercial models.</p>
 
-    <div style="background:white;border-radius:var(--radius);padding:2rem;overflow-x:auto">
+    <div style="background:white;border-radius:var(--radius-card);padding:2rem;overflow-x:auto">
       <table class="compare-table">
         <thead>
           <tr>
@@ -367,7 +438,7 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
   <div class="inner">
     <div class="tag">Deployment</div>
     <h2>How We Deploy National Cloud Infrastructure</h2>
-    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Three independent, geographically distributed data centers with our own server racks — designed, shipped, and commissioned by our hardware team.</p>
+    <p style="color:var(--text-secondary);max-width:700px;margin-bottom:2rem">Three independent, geographically distributed data centers with our own server racks — designed, shipped, and commissioned by our hardware team.</p>
 
     <div class="grid2">
       <div>
@@ -392,7 +463,7 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
 </section>
 
 <!-- PARTNERSHIP MODELS -->
-<section style="background:var(--black);color:white">
+<section style="background:var(--text-primary);color:white">
   <div class="inner">
     <div class="tag">Commercial Model</div>
     <h2 style="color:white">Partnership-Oriented — Not Vendor-Customer</h2>
@@ -417,8 +488,8 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
       </div>
     </div>
 
-    <div style="margin-top:3rem;background:#252525;border-radius:var(--radius);padding:2rem;text-align:center">
-      <h3 style="color:var(--red);margin-bottom:.5rem">UAE Government Credential</h3>
+    <div style="margin-top:3rem;background:#252525;border-radius:var(--radius-card);padding:2rem;text-align:center">
+      <h3 style="color:var(--primary-color);margin-bottom:.5rem">UAE Government Credential</h3>
       <p style="color:#aaa;font-size:1rem">DCAI AI Seal — <strong style="color:white">Tier S</strong> (Highest Level)</p>
       <p style="color:#888;font-size:.85rem;margin-top:.5rem">Government-issued recognition for advanced, reliable AI solutions. Combined with SAAL — 100% UAE-owned strategic partnership enabling UAE-origin eligibility.</p>
     </div>
@@ -426,11 +497,11 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
 </section>
 
 <!-- USE CASES -->
-<section style="background:var(--gray-bg)">
+<section style="background:var(--body-color)">
   <div class="inner">
     <div class="tag">Use Cases</div>
     <h2>What National Cloud Enables</h2>
-    <p style="color:var(--gray);max-width:700px;margin-bottom:2rem">Sovereign cloud isn't just infrastructure — it's the foundation for every digital national priority.</p>
+    <p style="color:var(--text-secondary);max-width:700px;margin-bottom:2rem">Sovereign cloud isn't just infrastructure — it's the foundation for every digital national priority.</p>
     <div class="grid3">
       <div class="card"><h4>🏥 National Health Platform</h4><p>Medical ID, EMR, epidemiology monitoring, telemedicine — all running on sovereign infrastructure with full data residency compliance.</p></div>
       <div class="card"><h4>🪪 Digital Identity</h4><p>Biometric citizen database, cross-agency verification, e-KYC — sensitive identity data never leaves national borders.</p></div>
@@ -449,9 +520,13 @@ footer{background:var(--black);color:var(--gray);padding:2.5rem 2rem;text-align:
 </div>
 
 <footer>
-  <div style="font-weight:900;font-size:1.1rem;color:white;letter-spacing:.1em;margin-bottom:.4rem">YANGO <span style="color:var(--red)">TECH</span></div>
-  <p>Technology for national development · 35+ countries · Dubai, UAE</p>
-  <p style="margin-top:.8rem;font-size:.75rem;color:#555">Confidential — Prepared for the African Ambassadors Event, Moscow 2026</p>
+  <div class="logo">
+    <img src="https://avatars.mds.yandex.net/get-lpc/14837328/21641dca-3288-4eeb-8d99-81f8cb31a763/orig" alt="Yango Tech" width="176" height="30">
+  </div>
+  <p style="margin-top:1rem;">Technology for national development · 35+ countries · Dubai, UAE</p>
+  <div class="footer-bottom">
+    <p>Confidential — Prepared for the African Ambassadors Event, Moscow 2026</p>
+  </div>
 </footer>
 
 </body>
