@@ -30,8 +30,10 @@
     --border-color: rgba(196, 196, 196, 1);
     --font-headline: "Yango Headline", Helvetica, Arial, sans-serif;
     --font-body: "Yango Group Text", "YS Text", Helvetica, Arial, sans-serif;
-    --letter-spacing-body: 0.2em;
+    --letter-spacing-body: 0.05em;
     --letter-spacing-headline: calc(1em / 50);
+    --letter-spacing-ui: 0.12em;
+    --letter-spacing-cta: 0.15em;
     --radius-card: 1.875rem;
     --radius-btn: 2rem;
     --radius-pill: 2rem;
@@ -48,12 +50,13 @@
   body {
     font-family: var(--font-body);
     font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.4;
+    font-size: 0.875rem;
+    line-height: 1.5;
     color: var(--text-primary);
     background-color: var(--body-color);
     letter-spacing: var(--letter-spacing-body);
     font-variant-numeric: proportional-nums;
+    text-transform: none;
   }
   ::selection { background: var(--primary-color); color: white; }
   a { color: inherit; text-decoration: none; transition: var(--transition-fast); }
@@ -79,8 +82,8 @@
   }
   .nav-links a {
     padding: 1.1rem 1rem;
-    font-size: 0.75rem; font-weight: 500;
-    letter-spacing: var(--letter-spacing-body);
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: var(--letter-spacing-ui);
     text-transform: uppercase;
     color: var(--text-on-dark);
     text-decoration: none;
@@ -93,8 +96,8 @@
     padding: 0.75rem 1.5rem;
     background: var(--surface-dark); color: var(--text-on-dark);
     border: none; border-radius: var(--radius-btn);
-    font-family: var(--font-body); font-weight: 500; font-size: 0.75rem;
-    letter-spacing: var(--letter-spacing-body); text-transform: uppercase;
+    font-family: var(--font-body); font-weight: 500; font-size: 0.72rem;
+    letter-spacing: var(--letter-spacing-cta); text-transform: uppercase;
     text-decoration: none; cursor: pointer; transition: var(--transition-fast);
   }
   .nav-cta:hover { background: var(--primary-color); color: white; }
@@ -109,8 +112,8 @@
   .mobile-menu.open { display: flex; }
   .mobile-menu a {
     color: var(--text-on-dark); text-decoration: none;
-    font-size: 0.75rem; font-weight: 500; padding: 0.5rem 0;
-    letter-spacing: var(--letter-spacing-body); text-transform: uppercase;
+    font-size: 0.72rem; font-weight: 500; padding: 0.5rem 0;
+    letter-spacing: var(--letter-spacing-ui); text-transform: uppercase;
   }
   .mobile-menu a:hover { color: var(--primary-color); }
 
@@ -138,8 +141,8 @@
   }
   .hero-tag {
     font-family: var(--font-body);
-    color: var(--primary-color); font-size: 0.75rem; font-weight: 500;
-    letter-spacing: var(--letter-spacing-body); text-transform: uppercase;
+    color: var(--primary-color); font-size: 0.72rem; font-weight: 500;
+    letter-spacing: var(--letter-spacing-ui); text-transform: uppercase;
     margin-bottom: 2rem;
     display: inline-block;
     animation: fadeUp 0.8s ease-out;
@@ -161,6 +164,8 @@
     font-size: 1rem;
     max-width: 36rem;
     margin-bottom: 3rem;
+    letter-spacing: var(--letter-spacing-body);
+    text-transform: none;
     animation: fadeUp 0.8s ease-out 0.2s both;
   }
   .hero-stats {
@@ -173,8 +178,9 @@
     line-height: 90%; letter-spacing: var(--letter-spacing-headline);
   }
   .hero-stat .label {
-    color: rgba(245,245,245,0.5); font-size: 0.75rem; font-weight: 500;
+    color: rgba(245,245,245,0.5); font-size: 0.72rem; font-weight: 500;
     margin-top: 0.5rem;
+    text-transform: uppercase; letter-spacing: var(--letter-spacing-ui);
   }
 
   @keyframes fadeUp {
@@ -186,8 +192,8 @@
   section { padding: 6rem var(--yt-padding); }
   .section-inner { max-width: var(--max-w); margin: 0 auto; }
   .section-tag {
-    color: var(--primary-color); font-size: 0.75rem; font-weight: 500;
-    letter-spacing: var(--letter-spacing-body); text-transform: uppercase;
+    color: var(--primary-color); font-size: 0.72rem; font-weight: 500;
+    letter-spacing: var(--letter-spacing-ui); text-transform: uppercase;
     margin-bottom: 1rem;
   }
   .section-title {
@@ -371,7 +377,7 @@
     font-family: var(--font-body);
     font-weight: 500;
     font-size: 0.875rem;
-    letter-spacing: var(--letter-spacing-body);
+    letter-spacing: var(--letter-spacing-cta);
     text-transform: uppercase;
     transition: var(--transition-fast);
   }

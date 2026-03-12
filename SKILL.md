@@ -32,7 +32,7 @@ Every rule below was extracted directly from the production site source code.
 The Yango Tech aesthetic is defined by:
 
 - **Monochrome + one red accent.** Almost everything is black, white, and grey. `#FF1A1A` red is used sparingly for CTAs and interactive highlights only.
-- **All-caps typography with wide letter-spacing** on body text. Headlines use the proprietary `Yango Headline` display font at weight 900 with extremely tight line-height (85-90%).
+- **Hybrid typography: uppercase headings + UI chrome, sentence case body.** Headlines use `Yango Headline` at weight 900 with tight line-height (85-90%). Nav links, tag pills, buttons, column headers, and stat labels stay uppercase with `0.12em` spacing. Body paragraphs and descriptions use sentence case with `0.05em` spacing for readability.
 - **Generous rounded corners** — cards at `1.875rem`, pills at `2rem`, dropdowns at `2.5rem`. Nothing is sharp-cornered.
 - **Dark hero, light body.** Hero sections are always near-black (`#141414` / `#000`) with white text. The rest of the page uses `#F5F5F5` body background.
 - **Subtle motion.** Image hovers scale 1.1x over 1.2s. Transitions are `ease-in-out`. No bouncy or spring animations.
@@ -54,8 +54,9 @@ Two font families, both hosted on `yastatic.net`:
 - **Weights**: 100 (Thin), 300 (Light), 400 (Regular), 500 (Medium), 600 (Bold), 900 (Black)
 - **Usage**: All body text, labels, navigation, buttons, form inputs
 - **CSS**: `font-family: "Yango Group Text", "YS Text", Helvetica, Arial, sans-serif`
-- **Body text always uses**: `text-transform: uppercase; letter-spacing: 0.2em; font-weight: 400`
-- **Labels/small text**: `font-size: 0.75rem; font-weight: 500`
+- **Body text uses**: `text-transform: none; letter-spacing: 0.05em; font-weight: 400; font-size: 0.875rem` (sentence case)
+- **UI chrome (nav, tags, buttons, stat labels, column headers)**: `text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; font-size: 0.72rem`
+- **Form inputs/placeholders**: `text-transform: none; letter-spacing: 0.04em; font-size: 0.875rem`
 
 All `@font-face` declarations with exact URLs are in `references/boilerplate.css`.
 
@@ -82,17 +83,19 @@ All `@font-face` declarations with exact URLs are in `references/boilerplate.css
 
 ## Typography Scale
 
-| Element        | Font Family      | Size              | Weight | Line-Height | Letter-Spacing      |
-|----------------|------------------|-------------------|--------|-------------|---------------------|
-| Hero / H1      | Yango Headline   | `4rem` – `6.25rem`| 900    | 85%         | `calc(1em / 50)`    |
-| H2             | Yango Headline   | `2.5rem` – `3.85rem`| 900  | 90%         | `calc(1em / 50)`    |
-| H3             | Yango Headline   | `2rem` – `3rem`   | 900    | 90%         | `calc(1em / 50)`    |
-| Body           | Yango Group Text | `1rem`            | 400    | 1.4         | `0.2em`             |
-| Small / Label  | Yango Group Text | `0.75rem`         | 500    | 1.2         | `0.2em`             |
-| Nav item       | Yango Group Text | `0.75rem`         | 500    | 1           | `0.2em`             |
+| Element        | Font Family      | Size              | Weight | Line-Height | Letter-Spacing      | Case        |
+|----------------|------------------|-------------------|--------|-------------|---------------------|-------------|
+| Hero / H1      | Yango Headline   | `4rem` – `6.25rem`| 900    | 85%         | `calc(1em / 50)`    | UPPERCASE   |
+| H2             | Yango Headline   | `2.5rem` – `3.85rem`| 900  | 90%         | `calc(1em / 50)`    | UPPERCASE   |
+| H3             | Yango Headline   | `2rem` – `3rem`   | 900    | 90%         | `calc(1em / 50)`    | UPPERCASE   |
+| Body / Desc    | Yango Group Text | `0.875rem`        | 400    | 1.5         | `0.05em`            | Sentence    |
+| Nav / Tags / Buttons / Stat labels | Yango Group Text | `0.72rem` | 500 | 1.2 | `0.12em`        | UPPERCASE   |
+| Form inputs    | Yango Group Text | `0.875rem`        | 400    | 1.4         | `0.04em`            | Sentence    |
 
-**All body-level text** MUST be `text-transform: uppercase`.
-Headlines can be mixed-case or uppercase depending on context.
+**Two-tier text rule:**
+- **Headings (H1–H3):** always uppercase Yango Headline
+- **UI chrome (nav links, tag pills, buttons, stat labels, footer column titles):** uppercase, `0.12em` spacing — these are short, functional labels
+- **Body paragraphs, card descriptions, hero subtitles, form inputs, footer link lists:** sentence case, `0.05em` spacing — these are longer, readable text
 
 ---
 
@@ -149,9 +152,11 @@ Never use gradient backgrounds on surfaces. Never use box-shadow on cards (use b
 ## DO / DON'T Checklist
 
 ### DO ✓
-- Use Yango Headline for ALL headings (H1–H3)
+- Use Yango Headline for ALL headings (H1–H3), always uppercase
 - Use Yango Group Text for ALL other text
-- Apply `text-transform: uppercase` and `letter-spacing: 0.2em` to body text
+- Apply **sentence case** with `letter-spacing: 0.05em` to body text, descriptions, hero subtitles, and form inputs
+- Apply **uppercase** with `letter-spacing: 0.12em` to nav links, tag pills, buttons, stat labels, and footer column titles
+- Keep CTA button text uppercase with `letter-spacing: 0.15em`
 - Use `#FF1A1A` only for CTAs and interactive accents
 - Use generous border-radius (1.25rem minimum on cards and inputs)
 - Use `backdrop-filter: blur(5px)` for overlaid tag pills on images
@@ -167,8 +172,8 @@ Never use gradient backgrounds on surfaces. Never use box-shadow on cards (use b
 - Use box-shadow on cards
 - Use bright/saturated colors besides `#FF1A1A` red
 - Use small border-radius (4px, 8px) — everything is generously rounded
-- Use lowercase body text — it must always be uppercase
-- Use tight letter-spacing on body text — it must be `0.2em`
+- Make body paragraphs or descriptions uppercase — only UI chrome and headings are uppercase
+- Use `0.2em` letter-spacing on body text — that's the old rule; body is `0.05em` now
 - Mix fonts — only Yango Headline and Yango Group Text, nothing else
 - Use decorative borders or outlines on cards — cards are flat with background color
 
